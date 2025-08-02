@@ -70,13 +70,18 @@
       <button onclick="connectWallet()" class="mb-4 px-6 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600">Conectar com MetaMask</button>
       <p id="walletStatus" class="text-sm mb-6"></p>
 
-      <!-- Pagamento com QSCOIN -->
-      <div class="flex items-center space-x-4 mb-6">
-        <img src="logo_qscoin.png" alt="QSCOIN Logo" class="h-12 w-12 rounded-full border shadow">
-        <button onclick="alert('Envie QSCOIN para: 0xD6Db6634E9fFA52553f2Cb3481C090b5ca56A987')" class="px-6 py-2 bg-green-700 text-white rounded hover:bg-green-800">
-          Pagar com QSCOIN
-        </button>
-      </div>
+      <div class="mb-4">
+  <p class="font-semibold mb-2">Pague com QSCOIN ou BNB</p>
+  <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+    <img src="logo_qscoin.png" alt="QSCOIN Logo" class="h-12 w-12 rounded-full border shadow">
+    <button onclick="sendBNB()" class="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700">
+      Pagar com BNB
+    </button>
+    <button onclick="sendQSCOIN()" class="px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800">
+      Pagar com QSCOIN
+    </button>
+  </div>
+</div>
 
       <!-- Pagamento via PIX -->
       <div class="bg-white p-4 rounded shadow border max-w-md">
@@ -121,4 +126,5 @@
   </script>
 
 </body>
+
 </html>
