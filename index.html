@@ -15,7 +15,7 @@
 
   <header class="bg-white shadow p-4 flex items-center justify-between">
     <div class="flex items-center space-x-4">
-      <img src="logo_qscoin.png" alt="Logo QSCOIN" class="h-16">
+      <img src="logo_qscoin.png" alt="Logotipo da moeda QSCOIN" class="h-16">
       <h1 class="text-2xl font-bold">Quintal Suculento</h1>
     </div>
     <nav class="space-x-4 hidden md:flex">
@@ -51,7 +51,7 @@
         </div>
 
         <div>
-          <img src="lembrancas.png" class="rounded shadow mb-2 w-full">
+          <img src="lembrancas.png" alt="Lembranças personalizadas" class="rounded shadow mb-2 w-full">
           <p><strong>Lembranças personalizadas:</strong> Plantinha P6 + plaquinha personalizada, cultivada no Quintal Suculento.</p>
         </div>
 
@@ -64,25 +64,33 @@
     </section>
 
     <section id="pagamento" class="mb-12 text-left">
-      <h3 class="text-2xl font-bold mb-4">💳 Pagamento com QSCOIN, BNB ou PIX</h3>
-      <p class="mb-4">Escolha uma das formas de pagamento disponíveis abaixo:</p>
+  <h3 class="text-2xl font-bold mb-4">💳 Pagamento com QSCOIN, BNB ou PIX</h3>
+  <p class="mb-4">Escolha uma das formas de pagamento disponíveis abaixo:</p>
 
       <!-- Botão MetaMask -->
-      <button onclick="connectWallet()" class="mb-4 px-6 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600">Conectar com MetaMask</button>
-      <p id="walletStatus" class="text-sm mb-6"></p>
+     <button onclick="connectWallet()" class="mb-4 px-6 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600">Conectar com MetaMask</button>
+  <p id="walletStatus" class="text-sm mb-6"></p>
 
-      <div class="mb-4">
-  <p class="font-semibold mb-2">Pague com QSCOIN ou BNB</p>
-  <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-    <img src="logo_qscoin.png" alt="QSCOIN Logo" class="h-12 w-12 rounded-full border shadow">
-    <button onclick="sendBNB()" class="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700">
-      Pagar com BNB
-    </button>
-    <button onclick="sendQSCOIN()" class="px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800">
-      Pagar com QSCOIN
-    </button>
-  </div>
+  <div class="mb-6">
+    <p class="font-semibold mb-2">Pague com QSCOIN ou BNB</p>
+
+    <label for="bnbAmount" class="block text-sm font-medium text-green-900">Valor em BNB</label>
+    <input id="bnbAmount" type="number" step="0.0001" placeholder="Ex: 0.01" class="mb-3 p-2 border rounded w-40">
+
+    <label for="qscoinAmount" class="block text-sm font-medium text-green-900">Valor em QSCOIN</label>
+    <input id="qscoinAmount" type="number" step="1" placeholder="Ex: 10" class="mb-4 p-2 border rounded w-40">
+
+    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+
+  <button id="bnbButton" onclick="sendBNB()" class="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700">
+    Pagar com BNB
+  </button>
+
+  <button id="qsButton" onclick="sendQSCOIN()" class="px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800">
+    Pagar com QSCOIN
+  </button>
 </div>
+  </div>
 
       <!-- Pagamento via PIX -->
       <div class="bg-white p-4 rounded shadow border max-w-md">
@@ -114,63 +122,75 @@
    <script>
 const recipient = "0xD6Db6634E9fFA52553f2Cb3481C090b5ca56A987";
   const qscoinAddress = "0x7E2502C3Ce2fb492643C14FD35fE6a118C095169"; // contrato do token
-  const amountInBNB = "0.01"; // altere se quiser definir outro valor padrão
   const qscoinDecimals = 18;
 
-  async function connectWallet() {
-    if (!window.ethereum) {
-      alert("MetaMask não detectado");
-      return;
-    }
-    await window.ethereum.request({ method: 'eth_requestAccounts' });
-    const accounts = await ethereum.request({ method: 'eth_accounts' });
-    document.getElementById('walletStatus').innerText = "Carteira conectada: " + accounts[0];
-  }
-
   async function sendBNB() {
-    try {
-      const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-      const tx = await ethereum.request({
-        method: 'eth_sendTransaction',
-        params: [{
-          from: accounts[0],
-          to: recipient,
-          value: Web3.utils.toHex(Web3.utils.toWei(amountInBNB, 'ether'))
-        }]
-      });
-      alert("Transação enviada com sucesso! TX: " + tx);
-    } catch (err) {
-      alert("Erro ao enviar BNB: " + err.message);
-    }
+  const btn = document.getElementById("bnbButton");
+  try {
+    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    const bnbInput = document.getElementById("bnbAmount").value;
+    const valueBNB = bnbInput && parseFloat(bnbInput) > 0 ? bnbInput : "0.01";
+
+    btn.innerText = "Enviando...";
+    btn.disabled = true;
+
+    const tx = await ethereum.request({
+      method: 'eth_sendTransaction',
+      params: [{
+        from: accounts[0],
+        to: recipient,
+        value: Web3.utils.toHex(Web3.utils.toWei(valueBNB, 'ether'))
+      }]
+    });
+
+    btn.innerText = "Confirmado ✅";
+  } catch (err) {
+    btn.innerText = "Pagar com BNB";
+    alert("Erro ao enviar BNB: " + err.message);
+  } finally {
+    btn.disabled = false;
   }
+}
 
-  async function sendQSCOIN() {
-    try {
-      const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-      const web3 = new Web3(window.ethereum);
-      const contract = new web3.eth.Contract([{
-        "constant": false,
-        "inputs": [
-          { "name": "_to", "type": "address" },
-          { "name": "_value", "type": "uint256" }
-        ],
-        "name": "transfer",
-        "outputs": [{ "name": "", "type": "bool" }],
-        "type": "function"
-      }], qscoinAddress);
+async function sendQSCOIN() {
+  const btn = document.getElementById("qsButton");
+  try {
+    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    const web3 = new Web3(window.ethereum);
+    const qsInput = document.getElementById("qscoinAmount").value;
+    const qsAmount = qsInput && parseFloat(qsInput) > 0 ? qsInput : "10";
 
-      const amount = web3.utils.toBN(10).mul(web3.utils.toBN(10).pow(web3.utils.toBN(qscoinDecimals))); // envia 10 QSCOIN
+    const contract = new web3.eth.Contract([{
+      "constant": false,
+      "inputs": [
+        { "name": "_to", "type": "address" },
+        { "name": "_value", "type": "uint256" }
+      ],
+      "name": "transfer",
+      "outputs": [{ "name": "", "type": "bool" }],
+      "type": "function"
+    }], qscoinAddress);
 
-      const tx = await contract.methods.transfer(recipient, amount).send({ from: accounts[0] });
-      alert("QSCOIN enviado com sucesso! TX: " + tx.transactionHash);
-    } catch (err) {
-      alert("Erro ao enviar QSCOIN: " + err.message);
-    }
+    const amount = web3.utils.toBN(qsAmount).mul(web3.utils.toBN(10).pow(web3.utils.toBN(qscoinDecimals)));
+
+    btn.innerText = "Enviando...";
+    btn.disabled = true;
+
+    const tx = await contract.methods.transfer(recipient, amount).send({ from: accounts[0] });
+
+    btn.innerText = "Confirmado ✅";
+  } catch (err) {
+    btn.innerText = "Pagar com QSCOIN";
+    alert("Erro ao enviar QSCOIN: " + err.message);
+  } finally {
+    btn.disabled = false;
   }
+}
 </script>
 </body>
 
 </html>
+
 
 
 
