@@ -124,7 +124,63 @@
       }
     }
   </script>
+const recipient = "0xD6Db6634E9fFA52553f2Cb3481C090b5ca56A987";
+  const qscoinAddress = "0x7E2502C3Ce2fb492643C14FD35fE6a118C095169"; // contrato do token
+  const amountInBNB = "0.01"; // altere se quiser definir outro valor padrão
+  const qscoinDecimals = 18;
 
+  async function connectWallet() {
+    if (!window.ethereum) {
+      alert("MetaMask não detectado");
+      return;
+    }
+    await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const accounts = await ethereum.request({ method: 'eth_accounts' });
+    document.getElementById('walletStatus').innerText = "Carteira conectada: " + accounts[0];
+  }
+
+  async function sendBNB() {
+    try {
+      const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+      const tx = await ethereum.request({
+        method: 'eth_sendTransaction',
+        params: [{
+          from: accounts[0],
+          to: recipient,
+          value: Web3.utils.toHex(Web3.utils.toWei(amountInBNB, 'ether'))
+        }]
+      });
+      alert("Transação enviada com sucesso! TX: " + tx);
+    } catch (err) {
+      alert("Erro ao enviar BNB: " + err.message);
+    }
+  }
+
+  async function sendQSCOIN() {
+    try {
+      const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+      const web3 = new Web3(window.ethereum);
+      const contract = new web3.eth.Contract([{
+        "constant": false,
+        "inputs": [
+          { "name": "_to", "type": "address" },
+          { "name": "_value", "type": "uint256" }
+        ],
+        "name": "transfer",
+        "outputs": [{ "name": "", "type": "bool" }],
+        "type": "function"
+      }], qscoinAddress);
+
+      const amount = web3.utils.toBN(10).mul(web3.utils.toBN(10).pow(web3.utils.toBN(qscoinDecimals))); // envia 10 QSCOIN
+
+      const tx = await contract.methods.transfer(recipient, amount).send({ from: accounts[0] });
+      alert("QSCOIN enviado com sucesso! TX: " + tx.transactionHash);
+    } catch (err) {
+      alert("Erro ao enviar QSCOIN: " + err.message);
+    }
+  }
+</script>
 </body>
 
 </html>
+
