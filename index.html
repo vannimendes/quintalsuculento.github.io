@@ -112,10 +112,10 @@
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="https://wa.me/5571987650501" target="_blank" rel="noopener noreferrer"
-                 class="px-8 py-4 rounded-2xl bg-green-800 text-white font-semibold shadow-lg hover:bg-green-900 transition">
-                Quero transformar meu espaço
-              </a>
+              <a href="#harmonizacao-form"
+   class="px-8 py-4 rounded-2xl bg-green-800 text-white font-semibold shadow-lg hover:bg-green-900 transition">
+  Quero transformar meu espaço
+</a>
               <a href="https://loja.quintalsuculento.com.br" target="_blank" rel="noopener noreferrer"
                  class="px-8 py-4 rounded-2xl bg-white text-green-900 font-semibold border border-green-200 shadow hover:bg-green-50 transition">
                 Ver coleção de camisas
@@ -229,8 +229,7 @@
                 a iluminação e o melhor aproveitamento de cada cantinho.
               </p>
 
-              <a href="https://wa.me/5571987650501?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20harmonização%20de%20ambientes%20do%20Quintal%20Suculento%20🌿"
-   target="_blank"
+              <a href="#harmonizacao-form"
    class="inline-block mt-4 px-6 py-3 rounded-xl bg-green-800 text-white font-semibold shadow hover:bg-green-900 transition">
   🌞 Quero harmonizar meu espaço
 </a>
@@ -295,7 +294,167 @@
         </div>
       </div>
     </section>
+<section id="harmonizacao-form" class="py-16">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="glass rounded-3xl p-8 md:p-10 border border-green-100 shadow-xl">
+          <div class="text-center mb-10">
+            <span class="inline-block text-sm font-semibold uppercase tracking-widest text-green-700 mb-3">
+              Harmonização de ambientes
+            </span>
+            <h2 class="section-title text-3xl md:text-4xl font-extrabold text-green-950 mb-4">
+              Quero transformar meu espaço
+            </h2>
+            <p class="text-lg text-green-800 max-w-3xl mx-auto leading-relaxed">
+              Envie as informações iniciais do seu espaço para que possamos entender melhor o ambiente,
+              os seus desejos e preparar uma proposta inicial com mais clareza, praticidade e percepção de valor.
+            </p>
+            <p class="text-base md:text-lg text-green-700 max-w-2xl mx-auto mt-4">
+              Antes do orçamento, queremos entender o seu espaço, os seus desejos e o potencial do ambiente
+              para propor algo realmente pensado para você.
+            </p>
+          </div>
 
+          <form id="formHarmonizacao" class="space-y-8">
+            <div class="grid md:grid-cols-3 gap-6">
+              <div>
+                <label for="nome" class="block text-sm font-semibold text-green-900 mb-2">Nome</label>
+                <input type="text" id="nome" name="nome" required
+                       class="w-full rounded-2xl border border-green-200 bg-white px-4 py-3 text-green-900 focus:outline-none focus:ring-2 focus:ring-green-600">
+              </div>
+
+              <div>
+                <label for="whatsapp" class="block text-sm font-semibold text-green-900 mb-2">WhatsApp</label>
+                <input type="tel" id="whatsapp" name="whatsapp" required placeholder="(71) 99999-9999"
+                       class="w-full rounded-2xl border border-green-200 bg-white px-4 py-3 text-green-900 focus:outline-none focus:ring-2 focus:ring-green-600">
+            <p class="text-sm text-green-700 mt-2">
+  Usaremos esse número apenas para entrar em contato com você 🌿
+</p>
+              </div>
+
+              <div>
+                <label for="cidade" class="block text-sm font-semibold text-green-900 mb-2">Cidade</label>
+                <input type="text" id="cidade" name="cidade" required
+                       class="w-full rounded-2xl border border-green-200 bg-white px-4 py-3 text-green-900 focus:outline-none focus:ring-2 focus:ring-green-600">
+              </div>
+            </div>
+
+            <div>
+              <label for="tipo_espaco" class="block text-sm font-semibold text-green-900 mb-2">
+                1. Qual tipo de espaço deseja harmonizar?
+              </label>
+              <select id="tipo_espaco" name="tipo_espaco" required
+                      class="w-full rounded-2xl border border-green-200 bg-white px-4 py-3 text-green-900 focus:outline-none focus:ring-2 focus:ring-green-600">
+                <option value="">Selecione uma opção</option>
+                <option>Jardim</option>
+                <option>Varanda</option>
+                <option>Área externa</option>
+                <option>Ambiente interno</option>
+                <option value="Outro">Outro</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="falta_no_espaco" class="block text-sm font-semibold text-green-900 mb-2">
+                2. O que você sente que falta no espaço hoje?
+              </label>
+              <textarea id="falta_no_espaco" name="falta_no_espaco" rows="4"
+                        placeholder="Ex: vida, sombra, aconchego, beleza, organização"
+                        class="w-full rounded-2xl border border-green-200 bg-white px-4 py-3 text-green-900 focus:outline-none focus:ring-2 focus:ring-green-600"></textarea>
+            </div>
+
+            <div>
+              <label for="objetivo_principal" class="block text-sm font-semibold text-green-900 mb-2">
+                3. Qual objetivo principal?
+              </label>
+              <textarea id="objetivo_principal" name="objetivo_principal" rows="4"
+                        placeholder="Ex: relaxar, receber visitas, deixar mais bonito, valorizar imóvel"
+                        class="w-full rounded-2xl border border-green-200 bg-white px-4 py-3 text-green-900 focus:outline-none focus:ring-2 focus:ring-green-600"></textarea>
+            </div>
+
+            <div>
+              <p class="block text-sm font-semibold text-green-900 mb-3">
+                4. Você já possui plantas no local?
+              </p>
+              <div class="flex flex-col sm:flex-row gap-4">
+                <label class="inline-flex items-center gap-2 text-green-800">
+                  <input type="radio" name="possui_plantas" value="Sim" required class="text-green-700">
+                  Sim
+                </label>
+                <label class="inline-flex items-center gap-2 text-green-800">
+                  <input type="radio" name="possui_plantas" value="Não" required class="text-green-700">
+                  Não
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <p class="block text-sm font-semibold text-green-900 mb-3">
+                5. Nível de investimento pretendido
+              </p>
+              <div class="grid sm:grid-cols-2 gap-3">
+                <label class="flex items-center gap-2 rounded-xl border border-green-200 bg-white px-4 py-3 text-green-800">
+                  <input type="radio" name="investimento" value="Até R$500" required>
+                  Até R$500
+                </label>
+                <label class="flex items-center gap-2 rounded-xl border border-green-200 bg-white px-4 py-3 text-green-800">
+                  <input type="radio" name="investimento" value="R$500 a R$1.500" required>
+                  R$500 a R$1.500
+                </label>
+                <label class="flex items-center gap-2 rounded-xl border border-green-200 bg-white px-4 py-3 text-green-800">
+                  <input type="radio" name="investimento" value="R$1.500 a R$3.000" required>
+                  R$1.500 a R$3.000
+                </label>
+                <label class="flex items-center gap-2 rounded-xl border border-green-200 bg-white px-4 py-3 text-green-800">
+                  <input type="radio" name="investimento" value="Acima de R$3.000" required>
+                  Acima de R$3.000
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <label for="fotos_espaco" class="block text-sm font-semibold text-green-900 mb-2">
+                6. Envie fotos do espaço
+              </label>
+              <input type="file" id="fotos_espaco" name="fotos_espaco" accept="image/*" multiple
+                     class="w-full rounded-2xl border border-green-200 bg-white px-4 py-3 text-green-900 focus:outline-none focus:ring-2 focus:ring-green-600">
+              <p class="mt-2 text-sm text-green-700">
+                Após clicar em enviar, o WhatsApp abrirá com a mensagem pronta. Depois, é só anexar as fotos na conversa.
+              </p>
+            </div>
+
+            <div>
+              <label for="referencias" class="block text-sm font-semibold text-green-900 mb-2">
+                7. Alguma referência ou ideia que você gostou?
+              </label>
+              <textarea id="referencias" name="referencias" rows="4"
+                        placeholder="Pode enviar um link, uma inspiração ou descrever o estilo desejado"
+                        class="w-full rounded-2xl border border-green-200 bg-white px-4 py-3 text-green-900 focus:outline-none focus:ring-2 focus:ring-green-600"></textarea>
+            </div>
+
+            <div class="rounded-2xl bg-green-50 border border-green-100 p-5">
+              <p class="text-green-900 font-semibold mb-2">🌿 Como funciona depois do envio?</p>
+              <p class="text-green-800 leading-relaxed">
+                Após recebermos as suas informações, analisamos o espaço com atenção e entramos em contato para apresentar
+                os próximos passos da harmonização, incluindo a proposta inicial do serviço e a orientação sobre materiais.
+              </p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4">
+              <button type="submit"
+                      class="inline-flex justify-center items-center px-8 py-4 rounded-2xl bg-green-800 text-white font-semibold shadow-lg hover:bg-green-900 transition">
+                Enviar informações do meu espaço
+              </button>
+
+              <a href="https://wa.me/5571987650501"
+                 target="_blank" rel="noopener noreferrer"
+                 class="inline-flex justify-center items-center px-8 py-4 rounded-2xl bg-white text-green-900 font-semibold border border-green-200 shadow hover:bg-green-50 transition">
+                Prefiro falar pelo WhatsApp
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
     <section id="pagamento" class="py-16">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-2 gap-8 items-center">
@@ -373,7 +532,7 @@
     <span class="hidden sm:inline font-semibold">WhatsApp</span>
   </a>
 
-  <script>
+ <script>
     const menuButton = document.getElementById('menuButton');
     const mobileMenu = document.getElementById('mobileMenu');
 
@@ -389,6 +548,63 @@
         menuButton.setAttribute('aria-expanded', 'false');
       });
     });
+
+    const formHarmonizacao = document.getElementById('formHarmonizacao');
+const whatsappInput = document.getElementById('whatsapp');
+
+    if (whatsappInput) {
+      whatsappInput.addEventListener('input', function (e) {
+        let valor = e.target.value.replace(/\D/g, '');
+
+        if (valor.length > 11) valor = valor.slice(0, 11);
+
+        if (valor.length > 6) {
+          valor = valor.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, '($1) $2-$3');
+        } else if (valor.length > 2) {
+          valor = valor.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
+        } else if (valor.length > 0) {
+          valor = valor.replace(/^(\d{0,2})/, '($1');
+        }
+
+        e.target.value = valor;
+      });
+    }
+    if (formHarmonizacao) {
+      formHarmonizacao.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const nome = document.getElementById('nome').value.trim();
+        const whatsapp = document.getElementById('whatsapp').value.trim();
+        const cidade = document.getElementById('cidade').value.trim();
+        const tipoEspaco = document.getElementById('tipo_espaco').value;
+        const faltaNoEspaco = document.getElementById('falta_no_espaco').value.trim();
+        const objetivoPrincipal = document.getElementById('objetivo_principal').value.trim();
+        const possuiPlantas = document.querySelector('input[name="possui_plantas"]:checked')?.value || '';
+        const investimento = document.querySelector('input[name="investimento"]:checked')?.value || '';
+        const referencias = document.getElementById('referencias').value.trim();
+
+        const mensagem =
+`Olá! Acabei de preencher o formulário de harmonização no site do Quintal Suculento 🌿
+
+*Nome:* ${nome}
+*WhatsApp:* ${whatsapp}
+*Cidade:* ${cidade}
+
+*1. Tipo de espaço:* ${tipoEspaco}
+*2. O que falta no espaço hoje:* ${faltaNoEspaco}
+*3. Objetivo principal:* ${objetivoPrincipal}
+*4. Já possui plantas no local?* ${possuiPlantas}
+*5. Nível de investimento pretendido:* ${investimento}
+*7. Referências ou ideias:* ${referencias}
+
+Vou enviar as fotos do espaço em seguida por aqui.`;
+
+        const numero = '5571987650501';
+        const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+
+        window.open(url, '_blank');
+      });
+    }
   </script>
 </body>
 </html>
