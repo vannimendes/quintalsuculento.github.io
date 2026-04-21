@@ -333,7 +333,22 @@
                 <input type="text" id="cidade" name="cidade" required
                        class="w-full rounded-2xl border border-green-200 bg-white px-4 py-3 text-green-900 focus:outline-none focus:ring-2 focus:ring-green-600">
               </div>
-            </div>
+
+            <div>
+  <p class="block text-sm font-semibold text-green-900 mb-3">
+    Tipo de ambiente
+  </p>
+  <div class="flex flex-col sm:flex-row gap-4">
+    <label class="inline-flex items-center gap-2 text-green-800">
+      <input type="radio" name="tipo_ambiente" value="Residencial" required class="text-green-700">
+      Residencial
+    </label>
+    <label class="inline-flex items-center gap-2 text-green-800">
+      <input type="radio" name="tipo_ambiente" value="Empresarial" required class="text-green-700">
+      Empresarial
+    </label>
+  </div>
+</div>
 
             <div>
               <label for="tipo_espaco" class="block text-sm font-semibold text-green-900 mb-2">
@@ -438,12 +453,6 @@
                       class="inline-flex justify-center items-center px-8 py-4 rounded-2xl bg-green-800 text-white font-semibold shadow-lg hover:bg-green-900 transition">
                 Quero receber uma proposta para meu espaço 🌿
               </button>
-
-              <a href="https://wa.me/5571987650501"
-                 target="_blank" rel="noopener noreferrer"
-                 class="inline-flex justify-center items-center px-8 py-4 rounded-2xl bg-white text-green-900 font-semibold border border-green-200 shadow hover:bg-green-50 transition">
-                Prefiro falar pelo WhatsApp
-              </a>
             </div>
           </form>
         </div>
@@ -570,6 +579,7 @@ const whatsappInput = document.getElementById('whatsapp');
         const nome = document.getElementById('nome').value.trim();
         const whatsapp = document.getElementById('whatsapp').value.trim();
         const cidade = document.getElementById('cidade').value.trim();
+        const tipoAmbiente = document.querySelector('input[name="tipo_ambiente"]:checked')?.value || '';
         const tipoEspaco = document.getElementById('tipo_espaco').value;
         const faltaNoEspaco = document.getElementById('falta_no_espaco').value.trim();
         const objetivoPrincipal = document.getElementById('objetivo_principal').value.trim();
@@ -583,6 +593,7 @@ const whatsappInput = document.getElementById('whatsapp');
 *Nome:* ${nome}
 *WhatsApp:* ${whatsapp}
 *Cidade:* ${cidade}
+*Tipo de ambiente:* ${tipoAmbiente}
 
 *1. Tipo de espaço:* ${tipoEspaco}
 *2. O que falta no espaço hoje:* ${faltaNoEspaco}
