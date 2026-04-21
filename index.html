@@ -336,9 +336,9 @@
 </div>
            
   <div class="space-y-6">
-  <p class="text-sm font-semibold text-green-900">
-    Sobre o seu espaço
-  </p>
+<p class="text-sm font-semibold text-green-900">
+  1. Sobre o seu espaço
+</p>
 
   <div class="grid md:grid-cols-2 gap-6">
 
@@ -447,17 +447,19 @@
   <p class="text-green-900 font-semibold mb-2">
     7. Envio das fotos 📸
   </p>
-  <p class="text-green-800 leading-relaxed">
+  <p class="text-green-800 leading-relaxed mb-4">
     Após clicar em enviar, o WhatsApp será aberto automaticamente com a sua solicitação.
     Em seguida, é só anexar as fotos do seu espaço na conversa para continuarmos o atendimento 🌿
   </p>
+
+  <p class="text-green-900 font-semibold mb-2">
+    🌿 Como funciona depois do envio?
+  </p>
+  <p class="text-green-800 leading-relaxed">
+    Após recebermos as suas informações, analisamos o espaço com atenção e entramos em contato para apresentar
+    os próximos passos da harmonização, incluindo a proposta inicial do serviço e a orientação sobre materiais.
+  </p>
 </div>
-              <p class="text-green-900 font-semibold mb-2">🌿 Como funciona depois do envio?</p>
-              <p class="text-green-800 leading-relaxed">
-                Após recebermos as suas informações, analisamos o espaço com atenção e entramos em contato para apresentar
-                os próximos passos da harmonização, incluindo a proposta inicial do serviço e a orientação sobre materiais.
-              </p>
-            </div>
 
             <div class="flex flex-col sm:flex-row gap-4">
               <button type="submit"
@@ -606,7 +608,9 @@ const whatsappInput = document.getElementById('whatsapp');
 *Cidade:* ${cidade}
 *Tipo de ambiente:* ${tipoAmbiente}
 
-*1. Tipo de espaço:* ${tipoEspaco}
+*1. Sobre o espaço:*
+- Tipo de ambiente: ${tipoAmbiente}
+- Tipo de espaço: ${tipoEspaco}
 *2. O que falta no espaço hoje:* ${faltaNoEspaco}
 *3. Objetivo principal:* ${objetivoPrincipal}
 *4. Já possui plantas no local?* ${possuiPlantas}
