@@ -333,40 +333,50 @@
                 <input type="text" id="cidade" name="cidade" required
                        class="w-full rounded-2xl border border-green-200 bg-white px-4 py-3 text-green-900 focus:outline-none focus:ring-2 focus:ring-green-600">
               </div>
-
-            <div>
-  <p class="block text-sm font-semibold text-green-900 mb-3">
-    Tipo de ambiente
+</div>
+           
+  <div class="space-y-6">
+  <p class="text-sm font-semibold text-green-900">
+    Sobre o seu espaço
   </p>
-  <div class="flex flex-col sm:flex-row gap-4">
-    <label class="inline-flex items-center gap-2 text-green-800">
-      <input type="radio" name="tipo_ambiente" value="Residencial" required class="text-green-700">
-      Residencial
-    </label>
-    <label class="inline-flex items-center gap-2 text-green-800">
-      <input type="radio" name="tipo_ambiente" value="Empresarial" required class="text-green-700">
-      Empresarial
-    </label>
-  </div>
+
+  <div class="grid md:grid-cols-2 gap-6">
+
+    <div>
+      <p class="block text-sm font-semibold text-green-900 mb-3">
+        Tipo de ambiente
+      </p>
+      <div class="flex flex-col gap-2">
+        <label class="inline-flex items-center gap-2 text-green-800">
+          <input type="radio" name="tipo_ambiente" value="Residencial" required>
+          Residencial
+        </label>
+        <label class="inline-flex items-center gap-2 text-green-800">
+          <input type="radio" name="tipo_ambiente" value="Empresarial" required>
+          Empresarial
+        </label>
+      </div>
+    </div>
+
+    <div>
+  <label for="tipo_espaco" class="block text-sm font-semibold text-green-900 mb-2">
+    Tipo de espaço
+  </label>
+  <select id="tipo_espaco" name="tipo_espaco" required
+          class="w-full rounded-2xl border border-green-200 bg-white px-4 py-3 text-green-900 focus:outline-none focus:ring-2 focus:ring-green-600">
+    <option value="">Selecione uma opção</option>
+    <option>Jardim</option>
+    <option>Varanda</option>
+    <option>Área externa</option>
+    <option>Ambiente interno</option>
+    <option value="Outro">Outro</option>
+  </select>
 </div>
 
-            <div>
-              <label for="tipo_espaco" class="block text-sm font-semibold text-green-900 mb-2">
-                1. Qual tipo de espaço deseja harmonizar?
-              </label>
-              <select id="tipo_espaco" name="tipo_espaco" required
-                      class="w-full rounded-2xl border border-green-200 bg-white px-4 py-3 text-green-900 focus:outline-none focus:ring-2 focus:ring-green-600">
-                <option value="">Selecione uma opção</option>
-                <option>Jardim</option>
-                <option>Varanda</option>
-                <option>Área externa</option>
-                <option>Ambiente interno</option>
-                <option value="Outro">Outro</option>
-              </select>
-            </div>
-
-            <div>
-              <label for="falta_no_espaco" class="block text-sm font-semibold text-green-900 mb-2">
+  </div>
+</div>
+     <div>
+            <label for="falta_no_espaco" class="block text-sm font-semibold text-green-900 mb-2">
                 2. O que você sente que falta no espaço hoje?
               </label>
               <textarea id="falta_no_espaco" name="falta_no_espaco" rows="4"
