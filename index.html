@@ -96,7 +96,7 @@
   <main>
    <section class="relative overflow-hidden">
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 md:pt-24 md:pb-28">
-    <div class="text-center">
+   <div class="text-center hero-glow">
             <span class="inline-flex items-center px-4 py-2 rounded-full bg-green-100 text-green-800 text-sm font-semibold mb-5">
               🌿 Desde 2017 cultivando beleza, afeto e natureza viva
             </span>
@@ -433,17 +433,10 @@
               </div>
             </div>
 
-            <div class="rounded-2xl bg-green-50 border border-green-100 p-5">
-  <p class="text-green-900 font-semibold mb-2">📸 Envio das fotos</p>
-  <p class="text-green-800 leading-relaxed">
-    Após clicar em enviar, o WhatsApp será aberto automaticamente com a sua solicitação.
-    Em seguida, é só anexar as fotos do seu espaço na conversa para continuarmos o atendimento 🌿
-  </p>
-</div>
 
             <div>
               <label for="referencias" class="block text-sm font-semibold text-green-900 mb-2">
-                7. Alguma referência ou ideia que você gostou?
+                6. Alguma referência ou ideia que você gostou?
               </label>
               <textarea id="referencias" name="referencias" rows="4"
                         placeholder="Pode enviar um link, uma inspiração ou descrever o estilo desejado"
@@ -451,6 +444,14 @@
             </div>
 
             <div class="rounded-2xl bg-green-50 border border-green-100 p-5">
+  <p class="text-green-900 font-semibold mb-2">
+    7. Envio das fotos 📸
+  </p>
+  <p class="text-green-800 leading-relaxed">
+    Após clicar em enviar, o WhatsApp será aberto automaticamente com a sua solicitação.
+    Em seguida, é só anexar as fotos do seu espaço na conversa para continuarmos o atendimento 🌿
+  </p>
+</div>
               <p class="text-green-900 font-semibold mb-2">🌿 Como funciona depois do envio?</p>
               <p class="text-green-800 leading-relaxed">
                 Após recebermos as suas informações, analisamos o espaço com atenção e entramos em contato para apresentar
@@ -610,9 +611,8 @@ const whatsappInput = document.getElementById('whatsapp');
 *3. Objetivo principal:* ${objetivoPrincipal}
 *4. Já possui plantas no local?* ${possuiPlantas}
 *5. Nível de investimento pretendido:* ${investimento}
-*7. Referências ou ideias:* ${referencias}
-
-Vou enviar as fotos do espaço em seguida por aqui 📸`;
+*6. Referências ou ideias:* ${referencias}
+*7. Envio das Fotos 📸`;
 
         const numero = '5571987650501';
         const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
