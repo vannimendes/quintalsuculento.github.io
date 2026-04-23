@@ -221,7 +221,33 @@
 
         <div class="grid md:grid-cols-2 gap-8">
           <article class="card-premium rounded-3xl p-4">
-            <img src="harmonizaquintal.png" alt="Harmonização de ambientes" class="w-full rounded-2xl mb-4 object-cover">
+            <div class="relative w-full overflow-hidden rounded-2xl mb-4">
+
+  <!-- Slides -->
+  <div id="carousel-harmonizacao" class="flex transition-transform duration-500">
+
+    <img src="/images/harmonizacao/harmonizacao-01-resultado-inicial.jpg" class="w-full h-72 md:h-80 lg:h-96 flex-shrink-0 object-cover" alt="Resultado final">
+
+    <img src="/images/harmonizacao/harmonizacao-02-antes.jpg" class="w-full h-72 md:h-80 lg:h-96 flex-shrink-0 object-cover" alt="Antes">
+
+    <img src="/images/harmonizacao/harmonizacao-03-processo-1.jpg" class="w-full h-72 md:h-80 lg:h-96 flex-shrink-0 object-cover" alt="Processo">
+
+    <img src="/images/harmonizacao/harmonizacao-04-processo-2.jpg" class="w-full h-72 md:h-80 lg:h-96 flex-shrink-0 object-cover" alt="Processo">
+
+    <img src="/images/harmonizacao/harmonizacao-05-resultado-final.jpg" class="w-full h-72 md:h-80 lg:h-96 flex-shrink-0 object-cover" alt="Resultado final">
+
+  </div>
+
+  <!-- Botões -->
+  <button id="prevSlide" class="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-green-900 px-3 py-2 rounded-full shadow">
+    ←
+  </button>
+
+  <button id="nextSlide" class="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-green-900 px-3 py-2 rounded-full shadow">
+    →
+  </button>
+
+</div>
             <div class="px-2 pb-2">
               <h3 class="text-xl font-bold text-green-950 mb-2">🌞 Harmonização de ambientes</h3>
               <p class="text-green-800 leading-relaxed">
@@ -623,6 +649,59 @@ const whatsappInput = document.getElementById('whatsapp');
         window.open(url, '_blank');
       });
     }
-  </script>
+  const carousel = document.getElementById("carousel-harmonizacao");
+
+if (carousel) {
+  const slides = carousel.children;
+  const totalSlides = slides.length;
+
+  let index = 0;
+  let startX = 0;
+  let endX = 0;
+
+  function updateCarousel() {
+    carousel.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  document.getElementById("nextSlide").addEventListener("click", () => {
+    index = (index + 1) % totalSlides;
+    updateCarousel();
+  });
+
+  document.getElementById("prevSlide").addEventListener("click", () => {
+    index = (index - 1 + totalSlides) % totalSlides;
+    updateCarousel();
+  });
+
+  // Swipe no dedo
+  carousel.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  carousel.addEventListener("touchmove", (e) => {
+    endX = e.touches[0].clientX;
+  });
+
+  carousel.addEventListener("touchend", () => {
+    const distance = startX - endX;
+
+    if (distance > 50) {
+      index = (index + 1) % totalSlides;
+      updateCarousel();
+    } else if (distance < -50) {
+      index = (index - 1 + totalSlides) % totalSlides;
+      updateCarousel();
+    }
+
+    startX = 0;
+    endX = 0;
+  });
+
+  setInterval(() => {
+    index = (index + 1) % totalSlides;
+    updateCarousel();
+  }, 5000);
+}
+ </script>
 </body>
 </html>
