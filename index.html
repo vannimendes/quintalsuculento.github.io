@@ -247,8 +247,16 @@
             </p>
 
           </div>
-
-          <form id="formHarmonizacao" class="space-y-8">
+<div class="text-center mb-10">
+  <button
+    id="toggleFormButton"
+    type="button"
+    class="inline-flex justify-center items-center px-8 py-4 rounded-2xl bg-gradient-to-r from-green-700 to-green-800 text-white font-semibold shadow-lg hover:bg-green-900 transition"
+  >
+    Preencher formulário
+  </button>
+</div>
+          <form id="formHarmonizacao" class="space-y-8 hidden transition-all duration-500">
 
             <div class="grid md:grid-cols-3 gap-6">
               <div>
@@ -410,7 +418,7 @@
               </p>
             </div>
 
-            <div class="flex flex-col sm:flex-row gap-4">
+            <div class="flex justify-center">
               <button type="submit"
                       class="inline-flex justify-center items-center px-8 py-4 rounded-2xl bg-green-800 text-white font-semibold shadow-lg hover:bg-green-900 transition">
                 Enviar formulário
@@ -642,7 +650,33 @@
       });
     });
 
-    const formHarmonizacao = document.getElementById('formHarmonizacao');
+    const toggleFormButton = document.getElementById('toggleFormButton');
+const formHarmonizacao = document.getElementById('formHarmonizacao');
+
+if (toggleFormButton && formHarmonizacao) {
+  toggleFormButton.addEventListener('click', () => {
+    formHarmonizacao.classList.toggle('hidden');
+
+    if (!formHarmonizacao.classList.contains('hidden')) {
+      toggleFormButton.innerText = 'Ocultar formulário';
+
+      setTimeout(() => {
+        formHarmonizacao.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }, 100);
+
+    } else {
+      toggleFormButton.innerText = 'Preencher formulário';
+
+  document.getElementById('harmonizacao-form').scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+  });
+    }
+  });
+}
     const whatsappInput = document.getElementById('whatsapp');
 
     if (whatsappInput) {
