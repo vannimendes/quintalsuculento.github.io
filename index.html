@@ -444,65 +444,59 @@
 
         </div>
 
-        <div class="grid md:grid-cols-2 gap-8">
+        <div class="max-w-5xl mx-auto">
 
-          <article class="card-premium rounded-3xl p-3">
-            <img src="jardim_M.png" loading="lazy" alt="Minijardim tamanho M" class="w-full h-64 rounded-2xl mb-4 object-cover">
+<div class="card-premium rounded-3xl p-6 md:p-8">
 
-            <div class="px-2 pb-2">
-              <h3 class="text-xl font-bold text-green-950 mb-2">🪴 Minijardim Tamanho M</h3>
+  <div class="relative w-full overflow-hidden rounded-2xl mb-6">
 
-              <p class="text-green-800 leading-relaxed">
-              Composições naturais com plantas, pedras e elementos decorativos para levar vida ao ambiente.
-              </p>
+    <div id="carousel-minijardins" class="flex transition-transform duration-500 touch-pan-y">
 
-              <a href="https://wa.me/5571987650501?text=Olá!%20Tenho%20interesse%20em%20um%20minijardim%20personalizado%20do%20Quintal%20Suculento%20🌿"
-                 target="_blank"
-                 rel="noopener noreferrer"
-                 class="inline-block mt-4 px-6 py-3 rounded-xl bg-green-800 text-white font-semibold shadow hover:bg-green-900 transition">
-                Solicitar orçamento
-              </a>
-            </div>
-          </article>
+      <img src="jardim_M.png"
+           class="w-full h-80 md:h-[32rem] flex-shrink-0 object-contain bg-green-50"
+           alt="Minijardim Quintal Suculento">
 
-          <article class="card-premium rounded-3xl p-3">
-            <img src="jardim_G.png" loading="lazy" alt="Minijardim tamanho G" class="w-full h-64 rounded-2xl mb-4 object-cover">
+      <img src="jardim_G.png"
+           class="w-full h-80 md:h-[32rem] flex-shrink-0 object-contain bg-green-50"
+           alt="Minijardim Quintal Suculento">
 
-            <div class="px-2 pb-2">
-              <h3 class="text-xl font-bold text-green-950 mb-2">🌵 Minijardim Tamanho G</h3>
+    </div>
 
-              <p class="text-green-800 leading-relaxed">
-              Composições maiores com plantas e elementos naturais pensados para trazer presença e identidade ao ambiente.
-              </p>
+    <button id="prevMini"
+            class="absolute left-3 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-green-900 px-3 py-2 rounded-full shadow">
+      ←
+    </button>
 
-              <a href="https://wa.me/5571987650501?text=Olá!%20Tenho%20interesse%20em%20um%20minijardim%20personalizado%20do%20Quintal%20Suculento%20🌿"
-                 target="_blank"
-                 rel="noopener noreferrer"
-                 class="inline-block mt-4 px-6 py-3 rounded-xl bg-green-800 text-white font-semibold shadow hover:bg-green-900 transition">
-                Solicitar orçamento
-              </a>
-            </div>
-          </article>
+    <button id="nextMini"
+            class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-green-900 px-3 py-2 rounded-full shadow">
+      →
+    </button>
 
-          <article class="card-premium rounded-3xl p-3">
-            <img src="lembrancas.png" loading="lazy" alt="Lembranças personalizadas com plantinhas" class="w-full h-64 rounded-2xl mb-4 object-cover">
+  </div>
 
-            <div class="px-2 pb-2">
-              <h3 class="text-xl font-bold text-green-950 mb-2">🎁 Lembranças personalizadas</h3>
+  <div class="text-center max-w-3xl mx-auto">
 
-              <p class="text-green-800 leading-relaxed">
-                Plantinhas e detalhes personalizados para eventos especiais, criando recordações afetivas
-                com um toque vivo e natural.
-              </p>
+    <h3 class="text-2xl font-bold text-green-950 mb-4">
+      🪴 Minijardins Quintal Suculento
+    </h3>
 
-              <a href="https://wa.me/5571987650501?text=Olá!%20Tenho%20interesse%20em%20lembranças%20personalizadas%20com%20plantinhas%20para%20um%20evento%20🌿"
-                 target="_blank"
-                 rel="noopener noreferrer"
-                 class="inline-block mt-4 px-6 py-3 rounded-xl bg-green-800 text-white font-semibold shadow hover:bg-green-900 transition">
-                Solicitar orçamento
-              </a>
-            </div>
-          </article>
+    <p class="text-green-800 leading-relaxed text-lg mb-6">
+      Cada minijardim é criado de forma artesanal, unindo plantas, pedras,
+      texturas e elementos naturais para transformar pequenos espaços em
+      experiências vivas, acolhedoras e cheias de significado.
+    </p>
+
+    <a href="https://wa.me/5571987650501?text=Olá!%20Tenho%20interesse%20em%20um%20minijardim%20personalizado%20do%20Quintal%20Suculento%20🌿"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="inline-block px-8 py-4 rounded-2xl bg-green-800 text-white font-semibold shadow hover:bg-green-900 transition">
+      Solicitar orçamento
+    </a>
+
+  </div>
+
+</div>
+
         </div>
       </div>
     </section>
@@ -742,7 +736,29 @@ Vou anexar as fotos do espaço por aqui.`;
         window.location.href = url;
       });
     }
+const miniCarousel = document.getElementById("carousel-minijardins");
 
+if (miniCarousel) {
+
+  const miniSlides = miniCarousel.children;
+  const totalMiniSlides = miniSlides.length;
+
+  let miniIndex = 0;
+
+  function updateMiniCarousel() {
+    miniCarousel.style.transform = `translateX(-${miniIndex * 100}%)`;
+  }
+
+  document.getElementById("nextMini").addEventListener("click", () => {
+    miniIndex = (miniIndex + 1) % totalMiniSlides;
+    updateMiniCarousel();
+  });
+
+  document.getElementById("prevMini").addEventListener("click", () => {
+    miniIndex = (miniIndex - 1 + totalMiniSlides) % totalMiniSlides;
+    updateMiniCarousel();
+  });
+}
     const carousel = document.getElementById("carousel-harmonizacao");
 
     if (carousel) {
