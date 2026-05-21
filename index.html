@@ -51,6 +51,9 @@
     .section-title {
       letter-spacing: -0.02em;
     }
+    .loja-slide {
+      filter: drop-shadow(0 20px 30px rgba(6, 95, 70, 0.12));
+    }
   </style>
 </head>
 
@@ -552,35 +555,92 @@
       </div>
     </section>
 
-    <section id="loja" class="py-10">
+    <section id="loja" class="py-16">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-
+    
         <div class="rounded-3xl bg-white/90 border border-green-100 text-green-950 p-6 md:p-8 shadow-lg">
-          <div class="grid lg:grid-cols-3 gap-8 items-center">
 
-            <div class="lg:col-span-2">
-              <span class="inline-block text-sm font-semibold uppercase tracking-widest text-green-700 mb-3">
-                Loja online
-              </span>
+          <div class="text-center mb-10">
+            <span class="inline-block text-sm font-semibold uppercase tracking-widest text-green-700 mb-3">
+              Loja online
+            </span>
 
-              <h2 class="section-title text-3xl md:text-4xl font-extrabold mb-4">
-                Camisas autorais inspiradas na natureza
-              </h2>
+            <h2 class="section-title text-3xl md:text-4xl font-extrabold mb-4">
+              Camisas autorais inspiradas na natureza
+            </h2>
 
-              <p class="text-lg text-green-800 leading-relaxed max-w-3xl">
-                A loja é uma extensão da identidade do Quintal Suculento, com camisas inspiradas na natureza,
-                na Bahia e no nosso jeito de viver.
-              </p>
+            <p class="text-lg text-green-800 leading-relaxed max-w-3xl mx-auto">
+              A loja é uma extensão da identidade do Quintal Suculento, com camisas inspiradas na natureza,
+              na Bahia e no nosso jeito de viver.
+            </p>
+          </div>
+
+          <div class="relative w-full overflow-hidden rounded-3xl mb-6 shadow-xl bg-green-50 px-6 md:px-10 py-10">
+
+            <div id="carousel-loja"
+              class="flex transition-transform duration-700 ease-in-out touch-pan-y cursor-grab active:cursor-grabbing">
+
+              <img src="mockup-01.png"
+                class="loja-slide w-3/4 md:w-1/2 lg:w-1/3 h-80 md:h-[30rem] flex-shrink-0 object-contain rounded-2xl mx-2 transition-transform duration-500 hover:scale-[1.03]"
+                alt="Mockup da camisa Quintal Suculento coleção Nós somos a Natureza">
+
+              <img src="mockup-02.png"
+                class="loja-slide w-3/4 md:w-1/2 lg:w-1/3 h-80 md:h-[30rem] flex-shrink-0 object-contain rounded-2xl mx-2 transition-transform duration-500 hover:scale-[1.03]"
+                alt="Mockup da camisa Quintal Suculento coleção Nós somos a Natureza">
+
+              <img src="mockup-03.png"
+                class="loja-slide w-3/4 md:w-1/2 lg:w-1/3 h-80 md:h-[30rem] flex-shrink-0 object-contain rounded-2xl mx-2 transition-transform duration-500 hover:scale-[1.03]"
+                alt="Mockup da camisa Quintal Suculento coleção Nós somos a Natureza">
+
+              <img src="mockup-04.png"
+                class="loja-slide w-3/4 md:w-1/2 lg:w-1/3 h-80 md:h-[30rem] flex-shrink-0 object-contain rounded-2xl mx-2 transition-transform duration-500 hover:scale-[1.03]"
+                alt="Mockup da camisa Quintal Suculento coleção Nós somos a Natureza">
+
+              <img src="mockup-05.png"
+                class="loja-slide w-3/4 md:w-1/2 lg:w-1/3 h-80 md:h-[30rem] flex-shrink-0 object-contain rounded-2xl mx-2 transition-transform duration-500 hover:scale-[1.03]"
+                alt="Mockup da camisa Quintal Suculento coleção Nós somos a Natureza">
+
+              <img src="mockup-06.png"
+                class="loja-slide w-3/4 md:w-1/2 lg:w-1/3 h-80 md:h-[30rem] flex-shrink-0 object-contain rounded-2xl mx-2 transition-transform duration-500 hover:scale-[1.03]"
+                alt="Mockup da camisa Quintal Suculento coleção Nós somos a Natureza">
+
+              <img src="mockup-07.png"
+                class="loja-slide w-3/4 md:w-1/2 lg:w-1/3 h-80 md:h-[30rem] flex-shrink-0 object-contain rounded-2xl mx-2 transition-transform duration-500 hover:scale-[1.03]"
+                alt="Mockup da camisa Quintal Suculento coleção Nós somos a Natureza">
+
             </div>
 
-            <div class="flex flex-col gap-4">
-              <a href="https://loja.quintalsuculento.com.br" target="_blank" rel="noopener noreferrer"
-                class="inline-flex justify-center items-center px-6 py-4 rounded-2xl bg-green-800 text-white font-bold shadow hover:bg-green-900 transition">
-                Ver coleção de camisas
-              </a>
-            </div>
+            <button id="prevLoja"
+              class="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 rounded-full bg-green-800/90 text-white text-2xl shadow-lg hover:bg-green-900 transition"
+              aria-label="Mockup anterior">
+              ←
+            </button>
+
+            <button id="nextLoja"
+              class="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 rounded-full bg-green-800/90 text-white text-2xl shadow-lg hover:bg-green-900 transition"
+              aria-label="Próximo mockup">
+              →
+            </button>
 
           </div>
+
+          <div class="flex justify-center gap-3 mb-8 mt-7">
+            <span class="dot-loja w-3 h-3 rounded-full bg-green-800"></span>
+            <span class="dot-loja w-3 h-3 rounded-full bg-green-200"></span>
+            <span class="dot-loja w-3 h-3 rounded-full bg-green-200"></span>
+            <span class="dot-loja w-3 h-3 rounded-full bg-green-200"></span>
+            <span class="dot-loja w-3 h-3 rounded-full bg-green-200"></span>
+            <span class="dot-loja w-3 h-3 rounded-full bg-green-200"></span>
+            <span class="dot-loja w-3 h-3 rounded-full bg-green-200"></span>
+          </div>
+
+          <div class="text-center">
+            <a href="https://loja.quintalsuculento.com.br" target="_blank" rel="noopener noreferrer"
+              class="inline-flex justify-center items-center px-8 py-4 rounded-2xl bg-green-800 text-white font-bold shadow hover:bg-green-900 transition">
+              Ver coleção de camisas
+            </a>
+          </div>
+
         </div>
 
       </div>
@@ -782,6 +842,76 @@ Vou anexar as fotos do espaço por aqui.`;
         window.location.href = url;
       });
     }
+      const lojaCarousel = document.getElementById("carousel-loja");
+
+  if (lojaCarousel) {
+    const lojaSlides = lojaCarousel.children;
+    const totalLojaSlides = lojaSlides.length;
+    const dotsLoja = document.querySelectorAll('.dot-loja');
+
+    function updateDotsLoja() {
+      dotsLoja.forEach((dot, i) => {
+        dot.classList.toggle('bg-green-800', i === lojaIndex);
+        dot.classList.toggle('bg-green-200', i !== lojaIndex);
+      });
+      
+    }
+
+    let lojaIndex = 0;
+    let lojaStartX = 0;
+    let lojaEndX = 0;
+
+    function updateLojaCarousel() {
+      const slide = lojaSlides[lojaIndex];
+      const container = lojaCarousel.parentElement;
+
+      const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+      const containerCenter = container.offsetWidth / 2;
+
+      lojaCarousel.style.transform = `translateX(${containerCenter - slideCenter}px)`;
+      updateDotsLoja();
+    }
+
+    updateLojaCarousel();
+
+    setInterval(() => {
+      lojaIndex = (lojaIndex + 1) % totalLojaSlides;
+      updateLojaCarousel();
+    }, 4500);
+
+    document.getElementById("nextLoja").addEventListener("click", () => {
+      lojaIndex = (lojaIndex + 1) % totalLojaSlides;
+      updateLojaCarousel();
+    });
+
+    document.getElementById("prevLoja").addEventListener("click", () => {
+      lojaIndex = (lojaIndex - 1 + totalLojaSlides) % totalLojaSlides;
+      updateLojaCarousel();
+    });
+
+    lojaCarousel.addEventListener("touchstart", (e) => {
+      lojaStartX = e.touches[0].clientX;
+    });
+
+    lojaCarousel.addEventListener("touchmove", (e) => {
+      lojaEndX = e.touches[0].clientX;
+    });
+
+    lojaCarousel.addEventListener("touchend", () => {
+      const distance = lojaStartX - lojaEndX;
+
+      if (distance > 50) {
+        lojaIndex = (lojaIndex + 1) % totalLojaSlides;
+        updateLojaCarousel();
+      } else if (distance < -50) {
+        lojaIndex = (lojaIndex - 1 + totalLojaSlides) % totalLojaSlides;
+        updateLojaCarousel();
+      }
+
+      lojaStartX = 0;
+      lojaEndX = 0;
+    });
+  }
     const miniCarousel = document.getElementById("carousel-minijardins");
 
     if (miniCarousel) {
