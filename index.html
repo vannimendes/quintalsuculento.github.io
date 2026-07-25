@@ -54,6 +54,39 @@
     .loja-slide {
       filter: drop-shadow(0 20px 30px rgba(6, 95, 70, 0.12));
     }
+
+    /* Carrosséis: arraste natural no celular e no computador */
+    #carousel-harmonizacao,
+    #carousel-minijardins,
+    #carousel-loja {
+      touch-action: pan-y;
+      user-select: none;
+      -webkit-user-select: none;
+      will-change: transform;
+      cursor: grab;
+    }
+
+    #carousel-harmonizacao.is-dragging,
+    #carousel-minijardins.is-dragging,
+    #carousel-loja.is-dragging {
+      cursor: grabbing;
+    }
+
+    #carousel-harmonizacao img,
+    #carousel-minijardins img,
+    #carousel-loja img {
+      pointer-events: none;
+      -webkit-user-drag: none;
+      user-select: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #carousel-harmonizacao,
+      #carousel-minijardins,
+      #carousel-loja {
+        transition-duration: 0.01ms !important;
+      }
+    }
   </style>
 </head>
 
@@ -828,178 +861,284 @@ Vou anexar as fotos do espaço por aqui.`;
         window.location.href = url;
       });
     }
-      const lojaCarousel = document.getElementById("carousel-loja");
+    /**
+     * Carrossel reutilizável com Pointer Events.
+     * A imagem acompanha o dedo/mouse durante o arraste e encaixa suavemente
+     * no slide mais próximo ao soltar, sem disputar com a rolagem vertical.
+     */
+    function setupCarousel({
+      trackId,
+      slideSelector,
+      prevButtonId,
+      nextButtonId,
+      dotSelector,
+      autoplayDelay = 0
+    }) {
+      const track = document.getElementById(trackId);
+      if (!track) return;
 
-  if (lojaCarousel) {
-    const lojaSlides = lojaCarousel.children;
-    const totalLojaSlides = lojaSlides.length;
-    const dotsLoja = document.querySelectorAll('.dot-loja');
+      const viewport = track.parentElement;
+      const slides = Array.from(track.querySelectorAll(slideSelector));
+      const dots = Array.from(document.querySelectorAll(dotSelector));
+      const prevButton = document.getElementById(prevButtonId);
+      const nextButton = document.getElementById(nextButtonId);
 
-    function updateDotsLoja() {
-      dotsLoja.forEach((dot, i) => {
-        dot.classList.toggle('bg-green-800', i === lojaIndex);
-        dot.classList.toggle('bg-green-200', i !== lojaIndex);
-      });
-      
-    }
+      if (!viewport || slides.length === 0) return;
 
-    let lojaIndex = 0;
-    let lojaStartX = 0;
-    let lojaEndX = 0;
-
-    function updateLojaCarousel() {
-      const slide = lojaSlides[lojaIndex];
-      const container = lojaCarousel.parentElement;
-
-      const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
-      const containerCenter = container.offsetWidth / 2;
-
-      lojaCarousel.style.transform = `translateX(${containerCenter - slideCenter}px)`;
-      updateDotsLoja();
-    }
-
-    updateLojaCarousel();
-
-    setInterval(() => {
-      lojaIndex = (lojaIndex + 1) % totalLojaSlides;
-      updateLojaCarousel();
-    }, 4500);
-
-    document.getElementById("nextLoja").addEventListener("click", () => {
-      lojaIndex = (lojaIndex + 1) % totalLojaSlides;
-      updateLojaCarousel();
-    });
-
-    document.getElementById("prevLoja").addEventListener("click", () => {
-      lojaIndex = (lojaIndex - 1 + totalLojaSlides) % totalLojaSlides;
-      updateLojaCarousel();
-    });
-
-    lojaCarousel.addEventListener("touchstart", (e) => {
-      lojaStartX = e.touches[0].clientX;
-    });
-
-    lojaCarousel.addEventListener("touchmove", (e) => {
-      lojaEndX = e.touches[0].clientX;
-    });
-
-    lojaCarousel.addEventListener("touchend", () => {
-      const distance = lojaStartX - lojaEndX;
-
-      if (distance > 50) {
-        lojaIndex = (lojaIndex + 1) % totalLojaSlides;
-        updateLojaCarousel();
-      } else if (distance < -50) {
-        lojaIndex = (lojaIndex - 1 + totalLojaSlides) % totalLojaSlides;
-        updateLojaCarousel();
+      if (prevButton && !prevButton.hasAttribute('aria-label')) {
+        prevButton.setAttribute('aria-label', 'Imagem anterior');
       }
 
-      lojaStartX = 0;
-      lojaEndX = 0;
-    });
-  }
-    const miniCarousel = document.getElementById("carousel-minijardins");
-
-    if (miniCarousel) {
-
-      const miniSlides = miniCarousel.children;
-      const totalMiniSlides = miniSlides.length;
-      const dotsMini = document.querySelectorAll('.dot-mini');
-
-      function updateDotsMini() {
-        dotsMini.forEach((dot, i) => {
-          dot.classList.toggle('bg-green-800', i === miniIndex);
-          dot.classList.toggle('bg-green-200', i !== miniIndex);
-        });
+      if (nextButton && !nextButton.hasAttribute('aria-label')) {
+        nextButton.setAttribute('aria-label', 'Próxima imagem');
       }
 
-      let miniIndex = 0;
-
-      function updateMiniCarousel() {
-        const slide = miniSlides[miniIndex];
-        const container = miniCarousel.parentElement;
-
-        const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
-        const containerCenter = container.offsetWidth / 2;
-
-        miniCarousel.style.transform = `translateX(${containerCenter - slideCenter}px)`;
-        updateDotsMini();
-      }
-
-      updateMiniCarousel();
-      document.getElementById("nextMini").addEventListener("click", () => {
-        miniIndex = (miniIndex + 1) % totalMiniSlides;
-        updateMiniCarousel();
-      });
-
-      document.getElementById("prevMini").addEventListener("click", () => {
-        miniIndex = (miniIndex - 1 + totalMiniSlides) % totalMiniSlides;
-        updateMiniCarousel();
-      });
-    }
-    const carousel = document.getElementById("carousel-harmonizacao");
-
-    if (carousel) {
-      const slides = carousel.children;
-      const totalSlides = slides.length;
-      const dotsHarmonizacao = document.querySelectorAll('.dot-harmonizacao');
-
-      function updateDotsHarmonizacao() {
-        dotsHarmonizacao.forEach((dot, i) => {
-          dot.classList.toggle('bg-green-800', i === index);
-          dot.classList.toggle('bg-green-200', i !== index);
-        });
-      }
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const lastIndex = slides.length - 1;
 
       let index = 0;
-      let startX = 0;
-      let endX = 0;
+      let currentTranslate = 0;
+      let dragStartX = 0;
+      let dragDelta = 0;
+      let dragStartTime = 0;
+      let activePointerId = null;
+      let isDragging = false;
+      let autoplayTimer = null;
+      let resumeTimer = null;
+      let autoplayDirection = 1;
 
-      function updateCarousel() {
-        const slide = slides[index];
-        const container = carousel.parentElement;
+      slides.forEach((slide, slideIndex) => {
+        slide.setAttribute('draggable', 'false');
+        slide.setAttribute('aria-label', `${slideIndex + 1} de ${slides.length}`);
+      });
 
-        const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
-        const containerCenter = container.offsetWidth / 2;
+      viewport.setAttribute('tabindex', '0');
+      viewport.setAttribute('role', 'region');
+      viewport.setAttribute('aria-roledescription', 'carrossel');
 
-        carousel.style.transform = `translateX(${containerCenter - slideCenter}px)`;
-        updateDotsHarmonizacao();
+      function clamp(value, min, max) {
+        return Math.min(Math.max(value, min), max);
       }
 
-      updateCarousel();
-      document.getElementById("nextSlide").addEventListener("click", () => {
-        index = (index + 1) % totalSlides;
-        updateCarousel();
-      });
+      function getTranslateForIndex(targetIndex) {
+        const slide = slides[targetIndex];
+        const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+        const viewportCenter = viewport.clientWidth / 2;
+        return viewportCenter - slideCenter;
+      }
 
-      document.getElementById("prevSlide").addEventListener("click", () => {
-        index = (index - 1 + totalSlides) % totalSlides;
-        updateCarousel();
-      });
+      function setTrackPosition(value, animate = true) {
+        const duration = reducedMotion ? 0 : 420;
+        track.style.transition = animate
+          ? `transform ${duration}ms cubic-bezier(0.22, 1, 0.36, 1)`
+          : 'none';
+        track.style.transform = `translate3d(${value}px, 0, 0)`;
+      }
 
-      carousel.addEventListener("touchstart", (e) => {
-        startX = e.touches[0].clientX;
-      });
+      function updateDots() {
+        dots.forEach((dot, dotIndex) => {
+          const active = dotIndex === index;
+          dot.classList.toggle('bg-green-800', active);
+          dot.classList.toggle('bg-green-200', !active);
+          dot.setAttribute('aria-current', active ? 'true' : 'false');
+        });
+      }
 
-      carousel.addEventListener("touchmove", (e) => {
-        endX = e.touches[0].clientX;
-      });
-
-      carousel.addEventListener("touchend", () => {
-        const distance = startX - endX;
-
-        if (distance > 50) {
-          index = (index + 1) % totalSlides;
-          updateCarousel();
-        } else if (distance < -50) {
-          index = (index - 1 + totalSlides) % totalSlides;
-          updateCarousel();
+      function updateButtons() {
+        if (prevButton) {
+          prevButton.disabled = index === 0;
+          prevButton.classList.toggle('opacity-40', index === 0);
+          prevButton.classList.toggle('cursor-not-allowed', index === 0);
         }
 
-        startX = 0;
-        endX = 0;
+        if (nextButton) {
+          nextButton.disabled = index === lastIndex;
+          nextButton.classList.toggle('opacity-40', index === lastIndex);
+          nextButton.classList.toggle('cursor-not-allowed', index === lastIndex);
+        }
+      }
+
+      function render(animate = true) {
+        currentTranslate = getTranslateForIndex(index);
+        setTrackPosition(currentTranslate, animate);
+        updateDots();
+        updateButtons();
+      }
+
+      function goTo(targetIndex, animate = true) {
+        index = clamp(targetIndex, 0, lastIndex);
+        render(animate);
+      }
+
+      function stopAutoplay() {
+        if (autoplayTimer) {
+          clearInterval(autoplayTimer);
+          autoplayTimer = null;
+        }
+      }
+
+      function startAutoplay() {
+        stopAutoplay();
+        if (!autoplayDelay || reducedMotion || slides.length < 2) return;
+
+        autoplayTimer = setInterval(() => {
+          if (index === lastIndex) autoplayDirection = -1;
+          if (index === 0) autoplayDirection = 1;
+          goTo(index + autoplayDirection);
+        }, autoplayDelay);
+      }
+
+      function pauseAutoplayTemporarily() {
+        stopAutoplay();
+        if (resumeTimer) clearTimeout(resumeTimer);
+        if (autoplayDelay) {
+          resumeTimer = setTimeout(startAutoplay, 8000);
+        }
+      }
+
+      function onPointerDown(event) {
+        if (event.pointerType === 'mouse' && event.button !== 0) return;
+
+        isDragging = true;
+        activePointerId = event.pointerId;
+        dragStartX = event.clientX;
+        dragDelta = 0;
+        dragStartTime = performance.now();
+
+        track.classList.add('is-dragging');
+        track.style.transition = 'none';
+        track.setPointerCapture?.(event.pointerId);
+        pauseAutoplayTemporarily();
+      }
+
+      function onPointerMove(event) {
+        if (!isDragging || event.pointerId !== activePointerId) return;
+
+        dragDelta = event.clientX - dragStartX;
+
+        // Resistência suave ao tentar ultrapassar a primeira ou a última imagem.
+        const beyondStart = index === 0 && dragDelta > 0;
+        const beyondEnd = index === lastIndex && dragDelta < 0;
+        const adjustedDelta = (beyondStart || beyondEnd) ? dragDelta * 0.28 : dragDelta;
+
+        setTrackPosition(currentTranslate + adjustedDelta, false);
+      }
+
+      function finishDrag(event) {
+        if (!isDragging || event.pointerId !== activePointerId) return;
+
+        const elapsed = Math.max(performance.now() - dragStartTime, 1);
+        const velocity = dragDelta / elapsed;
+        const distanceThreshold = Math.min(90, viewport.clientWidth * 0.16);
+        const velocityThreshold = 0.45;
+
+        if (dragDelta < -distanceThreshold || velocity < -velocityThreshold) {
+          goTo(index + 1);
+        } else if (dragDelta > distanceThreshold || velocity > velocityThreshold) {
+          goTo(index - 1);
+        } else {
+          render(true);
+        }
+
+        isDragging = false;
+        activePointerId = null;
+        dragDelta = 0;
+        track.classList.remove('is-dragging');
+
+        try {
+          track.releasePointerCapture?.(event.pointerId);
+        } catch (_) {
+          // O navegador pode liberar a captura automaticamente.
+        }
+      }
+
+      track.addEventListener('pointerdown', onPointerDown);
+      track.addEventListener('pointermove', onPointerMove);
+      track.addEventListener('pointerup', finishDrag);
+      track.addEventListener('pointercancel', finishDrag);
+      track.addEventListener('lostpointercapture', (event) => {
+        if (isDragging && event.pointerId === activePointerId) finishDrag(event);
       });
+
+      prevButton?.addEventListener('click', () => {
+        pauseAutoplayTemporarily();
+        goTo(index - 1);
+      });
+
+      nextButton?.addEventListener('click', () => {
+        pauseAutoplayTemporarily();
+        goTo(index + 1);
+      });
+
+      dots.forEach((dot, dotIndex) => {
+        dot.setAttribute('role', 'button');
+        dot.setAttribute('tabindex', '0');
+        dot.setAttribute('aria-label', `Ir para a imagem ${dotIndex + 1}`);
+
+        const activateDot = () => {
+          pauseAutoplayTemporarily();
+          goTo(dotIndex);
+        };
+
+        dot.addEventListener('click', activateDot);
+        dot.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            activateDot();
+          }
+        });
+      });
+
+      viewport.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          pauseAutoplayTemporarily();
+          goTo(index - 1);
+        }
+
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          pauseAutoplayTemporarily();
+          goTo(index + 1);
+        }
+      });
+
+      let resizeFrame = null;
+      window.addEventListener('resize', () => {
+        cancelAnimationFrame(resizeFrame);
+        resizeFrame = requestAnimationFrame(() => render(false));
+      });
+
+      window.addEventListener('load', () => render(false), { once: true });
+
+      render(false);
+      startAutoplay();
     }
+
+    setupCarousel({
+      trackId: 'carousel-harmonizacao',
+      slideSelector: '.harmonizacao-slide',
+      prevButtonId: 'prevSlide',
+      nextButtonId: 'nextSlide',
+      dotSelector: '.dot-harmonizacao'
+    });
+
+    setupCarousel({
+      trackId: 'carousel-minijardins',
+      slideSelector: '.mini-slide',
+      prevButtonId: 'prevMini',
+      nextButtonId: 'nextMini',
+      dotSelector: '.dot-mini'
+    });
+
+    setupCarousel({
+      trackId: 'carousel-loja',
+      slideSelector: '.loja-slide',
+      prevButtonId: 'prevLoja',
+      nextButtonId: 'nextLoja',
+      dotSelector: '.dot-loja',
+      autoplayDelay: 4500
+    });
   </script>
 
 </body>
