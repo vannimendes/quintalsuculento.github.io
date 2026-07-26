@@ -59,8 +59,6 @@
     #carousel-harmonizacao,
     #carousel-minijardins,
     #carousel-loja {
-      width: max-content;
-      min-width: 100%;
       touch-action: pan-y;
       user-select: none;
       -webkit-user-select: none;
@@ -922,6 +920,9 @@ Vou anexar as fotos do espaço por aqui.`;
 
       const viewport = track.parentElement;
       const slides = Array.from(track.querySelectorAll(slideSelector));
+      
+      viewport.style.touchAction = 'pan-y';
+      
       const dots = Array.from(document.querySelectorAll(dotSelector));
       const prevButton = document.getElementById(prevButtonId);
       const nextButton = document.getElementById(nextButtonId);
@@ -1050,7 +1051,7 @@ Vou anexar as fotos do espaço por aqui.`;
 
         track.classList.add('is-dragging');
         track.style.transition = 'none';
-        track.setPointerCapture?.(event.pointerId);
+        viewport.setPointerCapture?.(event.pointerId);
         pauseAutoplayTemporarily();
       }
 
@@ -1089,17 +1090,17 @@ Vou anexar as fotos do espaço por aqui.`;
         track.classList.remove('is-dragging');
 
         try {
-          track.releasePointerCapture?.(event.pointerId);
+          viewport.releasePointerCapture?.(event.pointerId);
         } catch (_) {
           // O navegador pode liberar a captura automaticamente.
         }
       }
 
-      track.addEventListener('pointerdown', onPointerDown);
-      track.addEventListener('pointermove', onPointerMove);
-      track.addEventListener('pointerup', finishDrag);
-      track.addEventListener('pointercancel', finishDrag);
-      track.addEventListener('lostpointercapture', (event) => {
+      viewport.addEventListener('pointerdown', onPointerDown);
+      viewport.addEventListener('pointermove', onPointerMove);
+      viewport.addEventListener('pointerup', finishDrag);
+      viewport.addEventListener('pointercancel', finishDrag);
+      viewport.addEventListener('lostpointercapture', (event) => {
         if (isDragging && event.pointerId === activePointerId) finishDrag(event);
       });
 
