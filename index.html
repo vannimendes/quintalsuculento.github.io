@@ -947,8 +947,6 @@ Vou anexar as fotos do espaço por aqui.`;
     function setupCarousel({
       trackId,
       slideSelector,
-      prevButtonId,
-      nextButtonId,
       dotSelector,
       autoplayDelay = 0
     }) {
@@ -961,18 +959,9 @@ Vou anexar as fotos do espaço por aqui.`;
       viewport.style.touchAction = 'pan-y';
       
       const dots = Array.from(document.querySelectorAll(dotSelector));
-      const prevButton = document.getElementById(prevButtonId);
-      const nextButton = document.getElementById(nextButtonId);
 
       if (!viewport || slides.length === 0) return;
 
-      if (prevButton && !prevButton.hasAttribute('aria-label')) {
-        prevButton.setAttribute('aria-label', 'Imagem anterior');
-      }
-
-      if (nextButton && !nextButton.hasAttribute('aria-label')) {
-        nextButton.setAttribute('aria-label', 'Próxima imagem');
-      }
 
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const lastIndex = slides.length - 1;
@@ -1025,25 +1014,10 @@ Vou anexar as fotos do espaço por aqui.`;
         });
       }
 
-      function updateButtons() {
-        if (prevButton) {
-          prevButton.disabled = index === 0;
-          prevButton.classList.toggle('opacity-40', index === 0);
-          prevButton.classList.toggle('cursor-not-allowed', index === 0);
-        }
-
-        if (nextButton) {
-          nextButton.disabled = index === lastIndex;
-          nextButton.classList.toggle('opacity-40', index === lastIndex);
-          nextButton.classList.toggle('cursor-not-allowed', index === lastIndex);
-        }
-      }
-
       function render(animate = true) {
         currentTranslate = getTranslateForIndex(index);
         setTrackPosition(currentTranslate, animate);
         updateDots();
-        updateButtons();
       }
 
       function goTo(targetIndex, animate = true) {
@@ -1141,15 +1115,6 @@ Vou anexar as fotos do espaço por aqui.`;
         if (isDragging && event.pointerId === activePointerId) finishDrag(event);
       });
 
-      prevButton?.addEventListener('click', () => {
-        pauseAutoplayTemporarily();
-        goTo(index - 1);
-      });
-
-      nextButton?.addEventListener('click', () => {
-        pauseAutoplayTemporarily();
-        goTo(index + 1);
-      });
 
       dots.forEach((dot, dotIndex) => {
         dot.setAttribute('role', 'button');
@@ -1199,24 +1164,18 @@ Vou anexar as fotos do espaço por aqui.`;
     setupCarousel({
       trackId: 'carousel-harmonizacao',
       slideSelector: '.harmonizacao-slide',
-      prevButtonId: 'prevSlide',
-      nextButtonId: 'nextSlide',
       dotSelector: '.dot-harmonizacao'
     });
 
     setupCarousel({
       trackId: 'carousel-minijardins',
       slideSelector: '.mini-slide',
-      prevButtonId: 'prevMini',
-      nextButtonId: 'nextMini',
       dotSelector: '.dot-mini'
     });
 
     setupCarousel({
       trackId: 'carousel-loja',
       slideSelector: '.loja-slide',
-      prevButtonId: 'prevLoja',
-      nextButtonId: 'nextLoja',
       dotSelector: '.dot-loja',
       autoplayDelay: 4500
     });
