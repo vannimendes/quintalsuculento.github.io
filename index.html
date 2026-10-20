@@ -229,13 +229,13 @@
   }
   #minijardins.mj-section::before {
     top: 0;
-    height: 34%;
-    background: linear-gradient(to bottom, rgba(5, 33, 24, 0.72), rgba(5, 33, 24, 0));
+    height: 26%;
+    background: linear-gradient(to bottom, rgba(5, 33, 24, 0.55), rgba(5, 33, 24, 0));
   }
   #minijardins.mj-section::after {
     bottom: 0;
-    height: 52%;
-    background: linear-gradient(to top, rgba(5, 33, 24, 0.88), rgba(5, 33, 24, 0));
+    height: 24%;
+    background: linear-gradient(to top, rgba(5, 33, 24, 0.62), rgba(5, 33, 24, 0));
   }
 
   #minijardins .mj-head {
@@ -257,7 +257,7 @@
   #minijardins .mj-head h2 {
     margin: 0;
     color: #fff;
-    font-size: 1.75rem;
+    font-size: 1.6rem;
     line-height: 1.15;
     text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
   }
@@ -266,7 +266,7 @@
     position: absolute;
     left: 0;
     right: 0;
-    bottom: calc(2.9rem + env(safe-area-inset-bottom, 0px));
+    bottom: calc(3.3rem + env(safe-area-inset-bottom, 0px));
     z-index: 3;
     max-width: none;
     margin: 0;
@@ -274,25 +274,23 @@
     text-align: left;
     pointer-events: none;
   }
-  #minijardins .mj-text {
-    margin: 0 0 1rem;
-    color: rgba(255, 255, 255, 0.94);
-    font-size: 0.92rem;
-    line-height: 1.45;
-    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
+  /* No celular a foto é a protagonista: o parágrafo fica só no desktop */
+  #minijardins .mj-text { display: none; }
   #minijardins .mj-cta {
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
+    gap: 0.5rem;
     pointer-events: auto;
-    padding: 0.95rem 1.25rem;
-    border-radius: 1rem;
+    padding: 0.7rem 1.35rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    color: #0b3d2a;
+    font-size: 0.95rem;
+    font-weight: 600;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
   }
+  #minijardins .mj-cta::after { content: "\2192"; }
 
   #minijardins .mj-dots {
     position: absolute;
