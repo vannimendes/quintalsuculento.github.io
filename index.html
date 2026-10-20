@@ -163,6 +163,166 @@
 .loja-slide:hover {
   transform: scale(1.03);
 }
+
+/* Hero de Minijardins: tela cheia no celular */
+@media (max-width: 767px) {
+  #minijardins.mj-section {
+    position: relative;
+    padding: 0 !important;
+    height: calc(100vh - 5.6rem);
+    height: calc(100svh - 5.6rem);
+    min-height: 30rem;
+    overflow: hidden;
+    background: #0b2a1f;
+  }
+
+  #minijardins .mj-container,
+  #minijardins .mj-wrap {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  #minijardins .mj-card {
+    position: static;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    transform: none !important;
+  }
+
+  #minijardins .mj-viewport {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  #carousel-minijardins { height: 100%; }
+
+  #minijardins .mini-slide {
+    flex: 0 0 100%;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    object-fit: cover;
+    object-position: var(--mj-pos, 50% 50%);
+    transform: none !important;
+  }
+
+  /* Degradês para o texto ficar legível sobre qualquer foto */
+  #minijardins.mj-section::before,
+  #minijardins.mj-section::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+  #minijardins.mj-section::before {
+    top: 0;
+    height: 34%;
+    background: linear-gradient(to bottom, rgba(5, 33, 24, 0.72), rgba(5, 33, 24, 0));
+  }
+  #minijardins.mj-section::after {
+    bottom: 0;
+    height: 52%;
+    background: linear-gradient(to top, rgba(5, 33, 24, 0.88), rgba(5, 33, 24, 0));
+  }
+
+  #minijardins .mj-head {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    margin: 0;
+    padding: 1.5rem 1.25rem 0;
+    text-align: left;
+    pointer-events: none;
+  }
+  #minijardins .mj-head span {
+    margin: 0 0 0.45rem;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 0.72rem;
+  }
+  #minijardins .mj-head h2 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.75rem;
+    line-height: 1.15;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+  }
+
+  #minijardins .mj-copy {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(2.9rem + env(safe-area-inset-bottom, 0px));
+    z-index: 3;
+    max-width: none;
+    margin: 0;
+    padding: 0 1.25rem;
+    text-align: left;
+    pointer-events: none;
+  }
+  #minijardins .mj-text {
+    margin: 0 0 1rem;
+    color: rgba(255, 255, 255, 0.94);
+    font-size: 0.92rem;
+    line-height: 1.45;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  #minijardins .mj-cta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+    padding: 0.95rem 1.25rem;
+    border-radius: 1rem;
+  }
+
+  #minijardins .mj-dots {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(1.1rem + env(safe-area-inset-bottom, 0px));
+    z-index: 3;
+    margin: 0;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+  }
+  #minijardins .dot-mini {
+    position: relative;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: rgba(255, 255, 255, 0.55) !important;
+    transition: width 200ms ease, background 200ms ease;
+  }
+  #minijardins .dot-mini.bg-green-800 {
+    width: 1.5rem;
+    background: #fff !important;
+  }
+  /* Área de toque maior que o ponto visível */
+  #minijardins .dot-mini::after {
+    content: "";
+    position: absolute;
+    inset: -0.7rem -0.35rem;
+  }
+}
   </style>
 </head>
 
@@ -181,8 +341,8 @@
         </a>
 
         <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold text-green-900">
-          <a href="#sobre" class="hover:text-green-700 transition">Sobre</a>
           <a href="#minijardins" class="hover:text-green-700 transition">Minijardins</a>
+          <a href="#sobre" class="hover:text-green-700 transition">Sobre</a>
           <a href="#harmonizacao" class="hover:text-green-700 transition">Harmonização</a>
           <a href="#loja" class="hover:text-green-700 transition">Loja</a>
           <a href="#contato" class="hover:text-green-700 transition">Contato</a>
@@ -205,8 +365,8 @@
       <div id="mobileMenu" class="hidden md:hidden pb-4">
         <div
           class="glass rounded-2xl p-4 shadow-lg border border-green-100 flex flex-col space-y-3 text-green-900 font-medium">
-          <a href="#sobre" class="hover:text-green-700">Sobre</a>
           <a href="#minijardins" class="hover:text-green-700">Minijardins</a>
+          <a href="#sobre" class="hover:text-green-700">Sobre</a>
           <a href="#harmonizacao" class="hover:text-green-700">Harmonização</a>
           <a href="#loja" class="hover:text-green-700">Loja</a>
           <a href="#contato" class="hover:text-green-700">Contato</a>
@@ -222,6 +382,90 @@
   </header>
 
   <main>
+    <section id="minijardins" class="mj-section py-12" aria-label="Minijardins do Quintal Suculento">
+      <div class="mj-container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="mj-head text-center mb-10">
+          <span class="inline-block text-sm font-semibold uppercase tracking-widest text-green-700 mb-3">
+            Minijardins do Quintal Suculento
+          </span>
+
+          <h2 class="section-title text-3xl md:text-4xl font-extrabold text-green-900 mb-3">
+            Natureza viva harmonizando o seu espaço
+          </h2>
+
+        </div>
+
+        <div class="mj-wrap max-w-5xl mx-auto">
+
+          <div class="mj-card card-premium rounded-3xl p-6 md:p-8">
+
+            <div class="mj-viewport carousel-viewport relative w-full overflow-hidden rounded-3xl mb-6 shadow-xl bg-green-50 px-6 md:px-10">
+
+              <div id="carousel-minijardins" class="flex transition-transform duration-700 ease-in-out touch-pan-y cursor-grab active:cursor-grabbing">
+
+                <img src="images/minijardins/jardim-01.webp" style="--mj-pos: 50% 55%;"
+                  fetchpriority="high"
+                  decoding="async"
+                  class="mini-slide flex-shrink-0 object-cover rounded-2xl mx-2 transition-transform duration-500"
+                  alt="Minijardim personalizado do Quintal Suculento">
+
+                <img src="images/minijardins/jardim-02.webp" style="--mj-pos: 50% 50%;"
+                  loading="lazy"
+                  decoding="async"
+                  class="mini-slide flex-shrink-0 object-cover rounded-2xl mx-2 transition-transform duration-500"
+                  alt="Minijardim artesanal com plantas e elementos naturais">
+
+                <img src="images/minijardins/jardim-03.webp" style="--mj-pos: 50% 50%;"
+                  loading="lazy"
+                  decoding="async"
+                  class="mini-slide flex-shrink-0 object-cover rounded-2xl mx-2 transition-transform duration-500"
+                  alt="Composição de minijardim Quintal Suculento">
+
+                <img src="images/minijardins/jardim-04.webp" style="--mj-pos: 54% 50%;"
+                  loading="lazy"
+                  decoding="async"
+                  class="mini-slide flex-shrink-0 object-cover rounded-2xl mx-2 transition-transform duration-500"
+                  alt="Minijardim com plantas, pedras e elementos naturais">
+
+                <img src="images/minijardins/jardim-05.webp" style="--mj-pos: 42% 50%;"
+                  loading="lazy"
+                  decoding="async"
+                  class="mini-slide flex-shrink-0 object-cover rounded-2xl mx-2 transition-transform duration-500"
+                  alt="Minijardim criado artesanalmente pelo Quintal Suculento">
+
+              </div>
+
+            </div>
+            <div class="mj-dots flex justify-center gap-3 mb-8 mt-7">
+              <span class="dot-mini w-3 h-3 rounded-full bg-green-800"></span>
+              <span class="dot-mini w-3 h-3 rounded-full bg-green-200"></span>
+              <span class="dot-mini w-3 h-3 rounded-full bg-green-200"></span>
+              <span class="dot-mini w-3 h-3 rounded-full bg-green-200"></span>
+              <span class="dot-mini w-3 h-3 rounded-full bg-green-200"></span>
+            </div>
+            <div class="mj-copy text-center max-w-3xl mx-auto">
+
+
+              <p class="mj-text text-green-800 leading-relaxed text-lg mb-6">
+                Cada minijardim é criado de forma artesanal, unindo plantas, pedras e elementos naturais.
+                Transformam espaços, despertam sentidos e trazem bem-estar para o seu dia.
+              </p>
+
+              <a href="https://wa.me/5571987650501?text=Olá!%20Tenho%20interesse%20em%20um%20minijardim%20personalizado%20do%20Quintal%20Suculento%20🌿"
+                target="_blank" rel="noopener noreferrer"
+                class="mj-cta inline-block px-8 py-4 rounded-2xl bg-green-800 text-white font-semibold shadow hover:bg-green-900 transition">
+                Quero o meu Minijardim
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
     <section id="sobre" class="pt-20 pb-14 md:pt-28 md:pb-20">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="glass rounded-3xl p-8 md:p-10 border border-green-100 shadow-xl">
@@ -256,89 +500,6 @@
       </div>
     </section>
 
-
-    <section id="minijardins" class="py-12">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        <div class="text-center mb-10">
-          <span class="inline-block text-sm font-semibold uppercase tracking-widest text-green-700 mb-3">
-            Minijardins do Quintal Suculento
-          </span>
-
-          <h2 class="section-title text-3xl md:text-4xl font-extrabold text-green-900 mb-3">
-            Natureza viva harmonizando o seu espaço
-          </h2>
-
-        </div>
-
-        <div class="max-w-5xl mx-auto">
-
-          <div class="card-premium rounded-3xl p-6 md:p-8">
-
-            <div class="carousel-viewport relative w-full overflow-hidden rounded-3xl mb-6 shadow-xl bg-green-50 px-6 md:px-10">
-
-              <div id="carousel-minijardins" class="flex transition-transform duration-700 ease-in-out touch-pan-y cursor-grab active:cursor-grabbing">
-
-                <img src="images/minijardins/jardim-01.webp"
-                  decoding="async"
-                  class="mini-slide flex-shrink-0 object-cover rounded-2xl mx-2 transition-transform duration-500"
-                  alt="Minijardim personalizado do Quintal Suculento">
-
-                <img src="images/minijardins/jardim-02.webp"
-                  loading="lazy"
-                  decoding="async"
-                  class="mini-slide flex-shrink-0 object-cover rounded-2xl mx-2 transition-transform duration-500"
-                  alt="Minijardim artesanal com plantas e elementos naturais">
-
-                <img src="images/minijardins/jardim-03.webp"
-                  loading="lazy"
-                  decoding="async"
-                  class="mini-slide flex-shrink-0 object-cover rounded-2xl mx-2 transition-transform duration-500"
-                  alt="Composição de minijardim Quintal Suculento">
-
-                <img src="images/minijardins/jardim-04.webp"
-                  loading="lazy"
-                  decoding="async"
-                  class="mini-slide flex-shrink-0 object-cover rounded-2xl mx-2 transition-transform duration-500"
-                  alt="Minijardim com plantas, pedras e elementos naturais">
-
-                <img src="images/minijardins/jardim-05.webp"
-                  loading="lazy"
-                  decoding="async"
-                  class="mini-slide flex-shrink-0 object-cover rounded-2xl mx-2 transition-transform duration-500"
-                  alt="Minijardim criado artesanalmente pelo Quintal Suculento">
-
-              </div>
-
-            </div>
-            <div class="flex justify-center gap-3 mb-8 mt-7">
-              <span class="dot-mini w-3 h-3 rounded-full bg-green-800"></span>
-              <span class="dot-mini w-3 h-3 rounded-full bg-green-200"></span>
-              <span class="dot-mini w-3 h-3 rounded-full bg-green-200"></span>
-              <span class="dot-mini w-3 h-3 rounded-full bg-green-200"></span>
-              <span class="dot-mini w-3 h-3 rounded-full bg-green-200"></span>
-            </div>
-            <div class="text-center max-w-3xl mx-auto">
-
-
-              <p class="text-green-800 leading-relaxed text-lg mb-6">
-                Cada minijardim é criado de forma artesanal, unindo plantas, pedras e elementos naturais.
-                Transformam espaços, despertam sentidos e trazem bem-estar para o seu dia.
-              </p>
-
-              <a href="https://wa.me/5571987650501?text=Olá!%20Tenho%20interesse%20em%20um%20minijardim%20personalizado%20do%20Quintal%20Suculento%20🌿"
-                target="_blank" rel="noopener noreferrer"
-                class="inline-block px-8 py-4 rounded-2xl bg-green-800 text-white font-semibold shadow hover:bg-green-900 transition">
-                Quero o meu Minijardim
-              </a>
-
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-    </section>
 
     <section id="harmonizacao" class="py-24">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
