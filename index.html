@@ -1163,7 +1163,7 @@ Vou anexar as fotos do espaço por aqui.`;
 
 
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const lastIndex = slides.length - 1;
+      let lastIndex = slides.length - 1;
 
       let index = 0;
       let currentTranslate = 0;
@@ -1189,11 +1189,48 @@ Vou anexar as fotos do espaço por aqui.`;
         return Math.min(Math.max(value, min), max);
       }
 
+      /*
+       * O slide ativo fica alinhado ao início da área visível e a trilha nunca
+       * passa das bordas, então não sobra faixa vazia no primeiro nem no último
+       * slide, em nenhum tamanho de tela.
+       */
+      function getBounds() {
+        const first = slides[0];
+        const last = slides[slides.length - 1];
+        const paddingRight = parseFloat(getComputedStyle(viewport).paddingRight) || 0;
+        const lastMargin = parseFloat(getComputedStyle(last).marginRight) || 0;
+        const trackEnd = last.offsetLeft + last.offsetWidth + lastMargin;
+        const minTranslate = Math.min(0, viewport.clientWidth - paddingRight - trackEnd);
+        return { first, minTranslate };
+      }
+
       function getTranslateForIndex(targetIndex) {
-        const slide = slides[targetIndex];
-        const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
-        const viewportCenter = viewport.clientWidth / 2;
-        return viewportCenter - slideCenter;
+        const { first, minTranslate } = getBounds();
+        const desired = first.offsetLeft - slides[targetIndex].offsetLeft;
+        return clamp(desired, minTranslate, 0);
+      }
+
+      // Quando o fim da trilha é alcançado antes do último slide (várias fotos
+      // por vez), os pontinhos que levariam à mesma posição ficam escondidos.
+      function updateLastIndex() {
+        const { first, minTranslate } = getBounds();
+        let limit = slides.length - 1;
+
+        for (let i = 0; i < slides.length; i++) {
+          if (first.offsetLeft - slides[i].offsetLeft <= minTranslate + 24) {
+            limit = i;
+            break;
+          }
+        }
+
+        lastIndex = limit;
+        index = clamp(index, 0, lastIndex);
+
+        dots.forEach((dot, dotIndex) => {
+          const visible = dotIndex <= lastIndex;
+          dot.style.display = visible ? '' : 'none';
+          dot.setAttribute('aria-hidden', visible ? 'false' : 'true');
+        });
       }
 
       function setTrackPosition(value, animate = true) {
@@ -1214,6 +1251,7 @@ Vou anexar as fotos do espaço por aqui.`;
       }
 
       function render(animate = true) {
+        updateLastIndex();
         currentTranslate = getTranslateForIndex(index);
         setTrackPosition(currentTranslate, animate);
         updateDots();
