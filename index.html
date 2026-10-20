@@ -12,6 +12,22 @@
     content="quintal suculento, harmonização de ambientes, plantas, suculentas, cactos, minijardim, lembranças personalizadas, camisas autorais">
   <meta name="author" content="Quintal Suculento">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="canonical" href="https://quintalsuculento.com.br/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Quintal Suculento">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://quintalsuculento.com.br/">
+  <meta property="og:title" content="Quintal Suculento | Harmonização de Ambientes com Plantas">
+  <meta property="og:description" content="Transformamos espaços com plantas, beleza e identidade. Harmonização de ambientes, minijardins personalizados, lembranças especiais e camisas autorais inspiradas na natureza.">
+  <meta property="og:image" content="https://quintalsuculento.com.br/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Logo do Quintal Suculento e um minijardim artesanal">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Quintal Suculento | Harmonização de Ambientes com Plantas">
+  <meta name="twitter:description" content="Transformamos espaços com plantas, beleza e identidade. Harmonização de ambientes, minijardins personalizados, lembranças especiais e camisas autorais inspiradas na natureza.">
+  <meta name="twitter:image" content="https://quintalsuculento.com.br/og-image.jpg">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
   <style>
@@ -166,6 +182,9 @@
 
 /* Hero de Minijardins: tela cheia no celular */
 @media (max-width: 767px) {
+  #minijardins .mj-head { transition: opacity 700ms ease; }
+  #minijardins.mj-clean .mj-head { opacity: 0; }
+
   #minijardins.mj-section {
     position: relative;
     padding: 0 !important;
@@ -331,7 +350,7 @@
 
       <div class="flex items-center justify-between py-4">
         <a href="#topo" class="flex items-center space-x-3">
-          <img src="logo_qscoin.png" alt="QSC - Quintal Suculento" class="h-14 w-auto rounded-full">
+          <img src="logo_qscoin.webp" alt="QSC - Quintal Suculento" width="300" height="343" class="h-14 w-auto rounded-full">
           <div>
             <p class="text-xl font-extrabold text-green-900 leading-tight">Quintal Suculento</p>
             <p class="text-sm text-green-700">Nós somos a natureza!</p>
@@ -470,7 +489,7 @@
 
           <div class="text-center mb-8">
 
-            <img src="logo-cacto.png" alt="Quintal Suculento" class="mx-auto w-40 md:w-52 h-auto mb-6 drop-shadow-lg">
+            <img src="logo-cacto.webp" alt="Quintal Suculento" width="420" height="480" class="mx-auto w-40 md:w-52 h-auto mb-6 drop-shadow-lg">
             <span class="inline-block text-sm font-semibold uppercase tracking-widest text-green-700 mb-3">
               Natureza, arte e bem-estar
             </span>
@@ -980,8 +999,10 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 text-center">
 
             <img 
-      src="logo_qscoin.png" 
+      src="logo_qscoin.webp" 
       alt="Logo Quintal Suculento"
+      width="300" height="343"
+      loading="lazy"
       class="w-14 h-14 mx-auto mb-4 opacity-90"
       />
       
@@ -1395,6 +1416,19 @@ Vou anexar as fotos do espaço por aqui.`;
       render(false);
       startAutoplay();
     }
+
+    // Hero de Minijardins (celular): o título some depois de alguns segundos
+    // ou ao primeiro toque, deixando só a foto e o botão.
+    (function () {
+      const hero = document.getElementById('minijardins');
+      if (!hero) return;
+      const mobile = window.matchMedia('(max-width: 767px)');
+      const clean = () => hero.classList.add('mj-clean');
+      const timer = setTimeout(() => { if (mobile.matches) clean(); }, 4500);
+      ['pointerdown', 'keydown'].forEach(type =>
+        hero.addEventListener(type, () => { clearTimeout(timer); if (mobile.matches) clean(); }, { once: true })
+      );
+    })();
 
     setupCarousel({
       trackId: 'carousel-harmonizacao',
