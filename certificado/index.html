@@ -20,18 +20,15 @@ main{max-width:1000px;margin:auto;padding:22px 16px 60px}.top{display:flex;justi
 <div class="downloads"><button id="png">Baixar imagem (PNG)</button><button id="pdf">Baixar PDF</button></div></div><p class="privacy">O nome não é enviado ao site. O modelo oficial é mantido sem alterações na arte, exceto o preenchimento do nome.</p></section></main>
 <div id="modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal-card">
 <h2 id="modal-title">Mostre sua plantinha! 🌱</h2><p>Seu certificado foi preparado. Que tal nos mandar uma foto da suculenta que você plantou?</p>
-<div class="photo-choice"><label for="camera">📷 Tirar foto<input id="camera" type="file" accept="image/*" capture="environment"></label></div>
-<img id="photo-preview" class="photo-preview" hidden alt="Foto selecionada">
-<button id="download-photo" class="outline" hidden>Salvar foto para anexar</button>
 <button id="whatsapp" class="outline">Enviar pelo WhatsApp</button>
-<p class="tip" id="tip">O botão abre diretamente nosso número, mesmo que você não tenha o contato salvo. Depois, anexe a foto na conversa. A página não pode anexá-la automaticamente.</p>
+<p class="tip">Ao abrir o WhatsApp, toque na câmera, fotografe sua plantinha e envie para nós. Não é necessário salvar nosso número.</p>
 <button id="skip" class="skip">Agora não</button></div></div>
 <script>
 (()=>{
 'use strict';
 const ACCESS='SOMOS',PHONE='5571987650501',MESSAGE='Olá Vanni e Anne! Participei da oficina Mãos à Terra e essa é a minha nova plantinha!';
 const el=id=>document.getElementById(id),cv=el('certificate'),cx=cv.getContext('2d'),bg=new Image();
-let ready=false,photo=null,photoUrl=null,focusBefore=null;
+let ready=false,focusBefore=null;
 const err=(id,msg)=>{el(id).textContent=msg;el(id).hidden=!msg};
 bg.onload=()=>{ready=true;draw()};bg.onerror=()=>{err('name-error','O modelo oficial não carregou. Avise a equipe.');el('png').disabled=true;el('pdf').disabled=true};bg.src='./modelo-certificado.jpg';
 function draw(){if(!ready)return;cx.clearRect(0,0,2048,1536);cx.drawImage(bg,0,0,2048,1536);const name=el('name').value.trim().replace(/\s+/g,' ')||'Seu nome aqui';cx.textAlign='center';cx.textBaseline='alphabetic';cx.fillStyle='#214b24';let size=76;while(size>28){cx.font='bold '+size+'px Georgia,serif';if(cx.measureText(name).width<=1445)break;size-=2}cx.fillText(name,1024,626,1445);cx.save();cx.textAlign='center';cx.textBaseline='alphabetic';cx.fillStyle='#214b24';cx.font='italic 46px Georgia,serif';cx.fillText('Quintal Suculento',1024,1215,480);cx.restore()}
@@ -47,10 +44,7 @@ el('name').addEventListener('input',draw);
 el('png').addEventListener('click',()=>{const n=validName();if(!n||!ready)return;draw();cv.toBlob(b=>{if(!b){err('name-error','Falha ao gerar a imagem.');return}save(b,'certificado-maos-a-terra-'+slug(n)+'.png');openModal()},'image/png')});
 el('pdf').addEventListener('click',()=>{const n=validName();if(!n||!ready)return;draw();try{const s=atob(cv.toDataURL('image/jpeg',.94).split(',')[1]),a=new Uint8Array(s.length);for(let i=0;i<s.length;i++)a[i]=s.charCodeAt(i);save(pdfFromJPEG(a),'certificado-maos-a-terra-'+slug(n)+'.pdf');openModal()}catch(e){err('name-error','Falha ao gerar o PDF neste navegador.')}});
 el('skip').addEventListener('click',closeModal);el('modal').addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
-function usePhoto(file){if(!file)return;if(!file.type.startsWith('image/')){alert('Escolha uma imagem.');return}if(file.size>20*1024*1024){alert('Escolha uma foto menor que 20 MB.');return}photo=file;if(photoUrl)URL.revokeObjectURL(photoUrl);photoUrl=URL.createObjectURL(file);el('photo-preview').src=photoUrl;el('photo-preview').hidden=false;el('download-photo').hidden=false;el('tip').textContent='Foto pronta! Toque em Salvar foto para anexar e depois em Abrir conversa com o Quintal no WhatsApp. Nosso número abrirá com a mensagem pronta, mesmo sem estar salvo nos contatos.'}
-el('camera').addEventListener('change',e=>usePhoto(e.target.files[0]));
 function openChat(){window.open('https://wa.me/'+PHONE+'?text='+encodeURIComponent(MESSAGE),'_blank','noopener,noreferrer')}
 el('whatsapp').addEventListener('click',openChat);
-el('download-photo').addEventListener('click',()=>{if(!photo)return;const extension=(photo.name.split('.').pop()||'jpg').replace(/[^a-z0-9]/gi,'').slice(0,5)||'jpg';save(photo,'minha-plantinha.'+extension);el('tip').textContent='Foto baixada! Se necessário, salve-a em Fotos/Galeria. Agora abra a conversa do Quintal e anexe a foto ao WhatsApp.'});
 })();
 </script></body></html>
