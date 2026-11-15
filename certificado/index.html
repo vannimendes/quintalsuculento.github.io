@@ -1,197 +1,57 @@
 <!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#164b32">
-  <meta name="robots" content="noindex,nofollow">
-  <meta name="description" content="Emita o certificado de participação na Oficina Mãos à Terra do Quintal Suculento.">
-  <title>Certificado Mãos à Terra | Quintal Suculento</title>
-  <link rel="icon" href="../favicon.ico">
-  <style>
-    :root{color-scheme:light;--verde:#164b32;--verde2:#26744c;--creme:#faf7ed;--texto:#263d30;--borda:#d8dfd0}
-    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 10% 5%,#e0efdf,transparent 35%),radial-gradient(circle at 95% 95%,#e8ead8,transparent 40%),#f7f8f1;font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--texto)}
-    .shell{max-width:1020px;margin:auto;padding:24px 18px 56px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:38px}.brand{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;letter-spacing:.09em;color:var(--verde);text-transform:uppercase}.brand img{width:47px;height:47px;object-fit:contain}.back{color:var(--verde);font-weight:650;text-decoration:none;font-size:14px}.back:hover{text-decoration:underline}
-    .heading{text-align:center;margin:0 auto 28px;max-width:720px}.eyebrow{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.18em;color:#49765b}.heading h1{font-family:Georgia,serif;font-weight:500;line-height:1.12;font-size:clamp(2rem,6vw,3.45rem);margin:10px 0 14px;color:var(--verde)}.heading p{margin:0;color:#557060;font-size:16px}
-    .panel{max-width:620px;background:white;border:1px solid var(--borda);border-radius:22px;padding:clamp(24px,5vw,42px);box-shadow:0 18px 52px #23432c13;margin:0 auto 24px}.panel h2{margin:0 0 8px;font-size:23px;color:var(--verde)}.panel .hint{color:#607568;margin:0 0 23px;font-size:15px}
-    label{display:block;font-weight:700;margin:0 0 8px;font-size:14px}input{display:block;width:100%;padding:14px 15px;border:1.5px solid #9db7a3;border-radius:12px;font:inherit;color:var(--verde);outline-offset:3px;background:#fff}input:focus-visible{outline:3px solid #7bbd8a}button{display:inline-flex;justify-content:center;align-items:center;width:100%;min-height:52px;border:0;border-radius:12px;margin-top:18px;padding:12px 20px;background:var(--verde);color:white;font:700 16px system-ui;cursor:pointer}button:hover{background:var(--verde2)}button:disabled{opacity:.55;cursor:wait}.error{margin:12px 0 0;color:#a02825;font-size:14px;font-weight:650}.small{font-size:13px;color:#657569;margin:18px 0 0}.preview{max-width:930px;margin:22px auto 0}.preview h2{font-size:19px;color:var(--verde);text-align:center}.canvas-frame{padding:8px;background:#fff;box-shadow:0 12px 38px #14321b23;border:1px solid #d6dfd3;border-radius:9px}.canvas-frame canvas{display:block;width:100%;height:auto;aspect-ratio:2480/1754}.actions{max-width:600px;margin:18px auto 0}.center{text-align:center}.privacy{font-size:13px;color:#64796a;max-width:600px;margin:24px auto 0;text-align:center}[hidden]{display:none!important}
-    @media(max-width:580px){.top{margin-bottom:28px}.brand{letter-spacing:0;font-size:11px}.brand img{width:37px;height:37px}.shell{padding:18px 14px 46px}.heading p{font-size:15px}.panel{border-radius:17px}.canvas-frame{padding:4px}}
-  </style>
-</head>
-<body>
-  <main class="shell">
-    <div class="top"><div class="brand"><img src="../logo-cacto.webp" alt="" aria-hidden="true"> Quintal Suculento</div><a class="back" href="../">Voltar ao site</a></div>
-    <header class="heading"><span class="eyebrow">Mãos à Terra · 16 de novembro de 2026</span><h1>Seu certificado de participação</h1><p>Uma lembrança da experiência de plantar, criar e se conectar com a natureza.</p></header>
-    <section id="gate" class="panel" aria-labelledby="gate-title">
-      <h2 id="gate-title">Acesse seu certificado</h2>
-      <p class="hint">Digite o código informado pela equipe do Quintal Suculento durante a oficina.</p>
-      <form id="code-form" autocomplete="off"><label for="access-code">Código de acesso</label><input id="access-code" name="codigo" inputmode="text" autocapitalize="characters" spellcheck="false" placeholder="Digite o código da oficina" maxlength="40" required aria-describedby="code-error"><p class="error" id="code-error" role="alert" hidden></p><button type="submit" id="unlock">Continuar</button></form>
-      <p class="small">O código é destinado aos participantes da Oficina Mãos à Terra.</p>
-    </section>
-    <section id="issue" hidden aria-labelledby="issue-title">
-      <div class="panel"><h2 id="issue-title">Personalize seu certificado</h2><p class="hint">Escreva seu nome como deseja que apareça no documento. Confira a grafia antes de salvar.</p><form id="name-form"><label for="full-name">Nome do participante</label><input id="full-name" name="nome" maxlength="80" minlength="3" autocomplete="name" placeholder="Nome e sobrenome" required aria-describedby="name-error"><p class="error" id="name-error" role="alert" hidden></p><button type="submit">Baixar certificado em PDF</button></form><p class="small">Formato A4 horizontal. O nome é usado apenas no seu dispositivo para criar o PDF, sem ser enviado ao site.</p></div>
-      <div class="preview"><h2>Prévia do certificado</h2><div class="canvas-frame"><canvas id="certificate" width="2480" height="1754" role="img" aria-label="Prévia do certificado de participação na Oficina Mãos à Terra"></canvas></div></div>
-      <p class="privacy">O certificado é emitido com o nome digitado pelo participante. O código compartilhado não realiza confirmação individual de presença.</p>
-    </section>
-  </main>
-  <script>
-  (() => {
-    'use strict';
-    const EVENT = 'QSC-MAOS-20261116';
-    const DIGEST = '522c1425f7d13f61ba261ba347f5bca5ce1e7bf2f02761705dfdaab6c1303d85';
-    const gate = document.getElementById('gate');
-    const issue = document.getElementById('issue');
-    const codeForm = document.getElementById('code-form');
-    const codeInput = document.getElementById('access-code');
-    const codeError = document.getElementById('code-error');
-    const unlock = document.getElementById('unlock');
-    const nameForm = document.getElementById('name-form');
-    const nameInput = document.getElementById('full-name');
-    const nameError = document.getElementById('name-error');
-    const canvas = document.getElementById('certificate');
-    const ctx = canvas.getContext('2d');
-    const logo = new Image();
-    logo.onload = render;
-    logo.src = '../logo-cacto.webp';
-    function normalizeCode(value) { return value.normalize('NFKC').toUpperCase().replace(/[^A-Z0-9]/g, ''); }
-    async function sha256(value) {
-      const data = new TextEncoder().encode(value);
-      const result = await crypto.subtle.digest('SHA-256', data);
-      return Array.from(new Uint8Array(result), b => b.toString(16).padStart(2, '0')).join('');
-    }
-    codeForm.addEventListener('submit', async ev => {
-      ev.preventDefault();
-      codeError.hidden = true;
-      unlock.disabled = true;
-      try {
-        const value = normalizeCode(codeInput.value);
-        const hash = await sha256(EVENT + ':' + value);
-        if (hash !== DIGEST) {
-          codeError.textContent = 'Código não reconhecido. Confira com a equipe da oficina.';
-          codeError.hidden = false;
-          codeInput.focus();
-          return;
-        }
-        gate.hidden = true;
-        issue.hidden = false;
-        nameInput.focus();
-        render();
-      } catch (_) {
-        codeError.textContent = 'Não foi possível validar o código neste navegador. Abra esta página em uma conexão segura (HTTPS).';
-        codeError.hidden = false;
-      } finally { unlock.disabled = false; }
-    });
-    nameInput.addEventListener('input', render);
-    function text(value, x, y, font, color, align) {
-      ctx.font = font;
-      ctx.fillStyle = color;
-      ctx.textAlign = align || 'center';
-      ctx.fillText(value, x, y);
-    }
-    function line(x1,y1,x2,y2,color,width) {
-      ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=color;ctx.lineWidth=width;ctx.stroke();
-    }
-    function sprig(x,y,flip,scale) {
-      ctx.save();ctx.translate(x,y);ctx.scale(flip*scale,scale);
-      ctx.strokeStyle='#789a71';ctx.lineWidth=7;ctx.lineCap='round';
-      ctx.beginPath();ctx.moveTo(0,0);ctx.bezierCurveTo(45,-130,125,-210,180,-310);ctx.stroke();
-      for(let i=0;i<5;i++) {
-        const xx=22+i*30, yy=-65-i*48;
-        ctx.save();ctx.translate(xx,yy);ctx.rotate(-0.45);
-        ctx.fillStyle=i%2===0?'#9bb690':'#6d956f';
-        ctx.beginPath();ctx.ellipse(0,0,41,17,-0.3,0,Math.PI*2);ctx.fill();ctx.restore();
-        ctx.save();ctx.translate(xx-25,yy-21);ctx.rotate(0.7);
-        ctx.fillStyle='#aec6a1';ctx.beginPath();ctx.ellipse(0,0,37,15,0,0,Math.PI*2);ctx.fill();ctx.restore();
-      }
-      ctx.restore();
-    }
-    function drawName(name) {
-      const clean = name || 'Nome do participante';
-      const words = clean.split(/\s+/).filter(Boolean);
-      let rows=[clean];
-      if(clean.length>34 && words.length>2){
-        let best=1,delta=Infinity;
-        for(let i=1;i<words.length;i++){
-          const a=words.slice(0,i).join(' '),b=words.slice(i).join(' '),d=Math.abs(a.length-b.length);
-          if(d<delta){best=i;delta=d;}
-        }
-        rows=[words.slice(0,best).join(' '),words.slice(best).join(' ')];
-      }
-      const base=rows.length===1?100:82;
-      rows.forEach((row,i)=>{
-        let fontSize=base;
-        do{ctx.font='italic '+fontSize+'px Georgia,serif';fontSize-=2;}
-        while(ctx.measureText(row).width>2000&&fontSize>51);
-        text(row,1240,rows.length===1?910:890+i*91,'italic '+(fontSize+2)+'px Georgia,serif','#164b32');
-      });
-      line(440,rows.length===1?960:1040,2040,rows.length===1?960:1040,'#b8c8ad',3);
-    }
-    function render() {
-      if(!ctx)return;
-      const W=2480,H=1754;
-      ctx.clearRect(0,0,W,H);
-      ctx.fillStyle='#fcfbf5';ctx.fillRect(0,0,W,H);
-      ctx.strokeStyle='#214b36';ctx.lineWidth=11;ctx.strokeRect(63,63,W-126,H-126);
-      ctx.strokeStyle='#a6bea1';ctx.lineWidth=3;ctx.strokeRect(89,89,W-178,H-178);
-      ctx.strokeStyle='#dbdfc7';ctx.lineWidth=2;ctx.strokeRect(113,113,W-226,H-226);
-      sprig(182,1580,1,1.05);
-      sprig(2298,1580,-1,1.05);
-      ctx.save();ctx.translate(W,0);ctx.scale(-1,-1);sprig(182,-174,1,.75);ctx.restore();
-      ctx.save();ctx.translate(0,H);ctx.scale(1,-1);sprig(182,-174,1,.75);ctx.restore();
-      if(logo.complete&&logo.naturalWidth){ctx.drawImage(logo,1140,155,200,200);}
-      text('QUINTAL SUCULENTO',1240,414,'bold 39px system-ui,-apple-system,sans-serif','#456e4a');
-      text('CERTIFICADO',1240,610,'normal 148px Georgia,serif','#183f2b');
-      text('DE PARTICIPAÇÃO',1240,689,'bold 44px system-ui,-apple-system,sans-serif','#6b9567');
-      line(825,736,1655,736,'#b7cba9',4);
-      text('Certificamos que',1240,792,'39px Georgia,serif','#5a665d');
-      drawName(nameInput.value.trim().replace(/\s+/g,' '));
-      const offset=(nameInput.value.trim().length>34?48:0);
-      text('participou da Oficina Mãos à Terra, promovida pelo Quintal Suculento,',1240,1072+offset,'38px Georgia,serif','#394b3d');
-      text('uma experiência prática de plantio, conexão com a natureza e',1240,1137+offset,'38px Georgia,serif','#394b3d');
-      text('cuidados com cactos e suculentas.',1240,1202+offset,'38px Georgia,serif','#394b3d');
-      text('Realizada em 16 de novembro de 2026.',1240,1311+offset,'bold 39px Georgia,serif','#164b32');
-      text('“Nós somos a Natureza”',1240,1438+offset,'italic 43px Georgia,serif','#558150');
-      line(910,1543,1570,1543,'#7b9d78',3);
-      text('QUINTAL SUCULENTO',1240,1596,'bold 29px system-ui,-apple-system,sans-serif','#345f40');
-      text('quintalsuculento.com.br',1240,1640,'25px system-ui,-apple-system,sans-serif','#7d9580');
-    }
-    function makePDF(canvas) {
-      const base64=canvas.toDataURL('image/jpeg',.94).split(',')[1];
-      const binary=atob(base64);
-      const jpeg=new Uint8Array(binary.length);
-      for(let i=0;i<binary.length;i++)jpeg[i]=binary.charCodeAt(i);
-      const enc=new TextEncoder();const chunks=[];const offsets=[];let count=0;
-      function addBytes(bytes){chunks.push(bytes);count+=bytes.length;}
-      function addText(value){addBytes(enc.encode(value));}
-      function obj(i){offsets[i]=count;addText(i+' 0 obj\n');}
-      addText('%PDF-1.4\n');
-      obj(1);addText('<</Type /Catalog /Pages 2 0 R>>\nendobj\n');
-      obj(2);addText('<</Type /Pages /Kids [3 0 R] /Count 1>>\nendobj\n');
-      obj(3);addText('<</Type /Page /Parent 2 0 R /MediaBox [0 0 841.89 595.28] /Resources <</XObject <</Im0 4 0 R>>>> /Contents 5 0 R>>\nendobj\n');
-      obj(4);addText('<</Type /XObject /Subtype /Image /Width 2480 /Height 1754 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length '+jpeg.length+'>>\nstream\n');addBytes(jpeg);addText('\nendstream\nendobj\n');
-      const drawing='q\n841.89 0 0 595.28 0 0 cm\n/Im0 Do\nQ\n';
-      obj(5);addText('<</Length '+enc.encode(drawing).length+'>>\nstream\n'+drawing+'endstream\nendobj\n');
-      const xref=count;addText('xref\n0 6\n0000000000 65535 f \n');
-      for(let i=1;i<=5;i++)addText(String(offsets[i]).padStart(10,'0')+' 00000 n \n');
-      addText('trailer\n<</Size 6 /Root 1 0 R>>\nstartxref\n'+xref+'\n%%EOF');
-      return new Blob(chunks,{type:'application/pdf'});
-    }
-    nameForm.addEventListener('submit', ev => {
-      ev.preventDefault();nameError.hidden=true;
-      const name=nameInput.value.trim().replace(/\s+/g,' ');
-      if(name.length<3||name.length>80||/[<>\u0000-\u001f]/.test(name)){
-        nameError.textContent='Informe um nome válido, entre 3 e 80 caracteres.';nameError.hidden=false;return;
-      }
-      render();
-      try{
-        const blob=makePDF(canvas);const url=URL.createObjectURL(blob);
-        const slug=name.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,48)||'participante';
-        const a=document.createElement('a');a.href=url;a.download='certificado-maos-a-terra-'+slug+'.pdf';document.body.appendChild(a);a.click();a.remove();
-        setTimeout(()=>URL.revokeObjectURL(url),60000);
-      }catch(_){nameError.textContent='Não foi possível gerar o PDF. Tente abrir a página em outro navegador.';nameError.hidden=false;}
-    });
-    render();
-  })();
-  </script>
-</body>
-</html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#244a25"><meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Certificado da Oficina Mãos à Terra do Quintal Suculento.">
+<title>Certificado Mãos à Terra | Quintal Suculento</title><link rel="icon" href="../favicon.ico">
+<style>
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#eaf2e8,#faf8f1);color:#24402a;font:16px/1.5 system-ui,sans-serif}
+main{max-width:1000px;margin:auto;padding:22px 16px 60px}.top{display:flex;justify-content:space-between;gap:14px;align-items:center}.top a{color:#20542b;font-weight:700;text-decoration:none}.title{text-align:center;margin:35px auto 26px}.title h1{font:normal clamp(36px,7vw,58px) Georgia,serif;color:#214a24;margin:5px}.title p{color:#667567;margin:4px}.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#5a855e;font-weight:800}
+.panel{max-width:620px;margin:auto;background:white;border:1px solid #d7e1d6;border-radius:20px;padding:clamp(21px,5vw,36px);box-shadow:0 17px 42px #17301e12}.panel h2{margin:0 0 8px}.hint,.small{color:#607261}.hint{margin:0 0 23px}.small{font-size:13px}label{display:block;font-weight:700;font-size:14px;margin:0 0 7px}input[type=text]{width:100%;height:52px;padding:12px 14px;border:1.5px solid #a4bba6;border-radius:11px;font:inherit}button{cursor:pointer;border:0;min-height:49px;border-radius:11px;background:#285b30;color:white;padding:11px 16px;font:700 15px system-ui,sans-serif}button:hover{background:#1a4522}button:disabled{opacity:.5}button.outline{background:#e8f1e6;color:#205029;border:1px solid #b3ceb5}button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #73b586;outline-offset:3px}.full{width:100%;margin-top:15px}.error{color:#a52b27;font-size:14px;font-weight:700}
+.preview{max-width:950px;margin:30px auto 0}.preview h2{text-align:center;font-size:18px}.frame{padding:5px;border:1px solid #d2ddcf;background:white;border-radius:12px;box-shadow:0 14px 36px #172d1c20}.frame canvas{display:block;width:100%;height:auto;aspect-ratio:4/3}.downloads{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.privacy{text-align:center;font-size:13px;color:#637365;margin-top:20px}
+.modal{position:fixed;inset:0;background:#071b0ba6;display:grid;place-items:center;padding:16px;z-index:100}.modal-card{width:min(100%,510px);max-height:92dvh;overflow:auto;background:white;border-radius:20px;padding:25px}.modal-card h2{margin:0 0 7px}.modal-card p{font-size:14px;color:#607261}.photo-choice{display:flex;gap:9px}.photo-choice label{flex:1;text-align:center;background:#e9f2e7;padding:12px 8px;color:#21492a;border-radius:10px;cursor:pointer}.photo-choice input{position:absolute;opacity:0;width:1px;height:1px}.modal-card button{display:block;width:100%;margin-top:10px}.photo-preview{max-height:160px;max-width:100%;display:block;margin:12px auto;border-radius:8px}.modal-card .skip{background:white;color:#21492a;border:1px solid #bdd0bb}.message{background:#f0f5ed;padding:8px;border-radius:8px}.tip{font-size:12px!important}
+[hidden]{display:none!important}@media(max-width:560px){.downloads{grid-template-columns:1fr}.modal-card{padding:19px}.top{font-size:13px}}
+</style></head><body>
+<main><div class="top"><strong>🌿 Quintal Suculento</strong><a href="../">Voltar ao site</a></div>
+<header class="title"><span class="eyebrow">Mãos à Terra · 16 de novembro de 2026</span><h1>Seu certificado</h1><p>Uma lembrança da experiência de plantar e cuidar da natureza.</p></header>
+<section id="gate" class="panel"><h2>Acesse seu certificado</h2><p class="hint">Digite o código entregue pela equipe ao final da oficina.</p><form id="gate-form"><label for="code">Código de acesso</label><input type="text" id="code" maxlength="20" autocomplete="off" autocapitalize="characters" required placeholder="Código da oficina"><p id="code-error" role="alert" class="error" hidden></p><button class="full" type="submit">Continuar</button></form><p class="small">Código exclusivo para participantes. Não verifica individualmente a presença.</p></section>
+<section id="issue" hidden><div class="panel"><h2>Personalize seu certificado</h2><p class="hint">Digite seu nome como deseja que apareça no documento.</p><label for="name">Nome do participante</label><input id="name" type="text" maxlength="80" minlength="3" autocomplete="name" placeholder="Nome e sobrenome"><p id="name-error" role="alert" class="error" hidden></p><p class="small">Seu nome é usado apenas neste navegador, sem cadastro.</p></div>
+<div class="preview"><h2>Prévia do certificado oficial</h2><div class="frame"><canvas id="certificate" width="2048" height="1536" role="img" aria-label="Prévia do certificado de participação"></canvas></div>
+<div class="downloads"><button id="png">Baixar imagem (PNG)</button><button id="pdf">Baixar PDF</button></div></div><p class="privacy">O nome não é enviado ao site. O modelo oficial é mantido sem alterações na arte, exceto o preenchimento do nome.</p></section></main>
+<div id="modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal-card">
+<h2 id="modal-title">Mostre sua plantinha! 🌱</h2><p>Seu certificado foi preparado. Que tal nos mandar uma foto da suculenta que você plantou?</p>
+<div class="photo-choice"><label for="camera">📷 Tirar foto<input id="camera" type="file" accept="image/*" capture="environment"></label><label for="gallery">🖼️ Galeria<input id="gallery" type="file" accept="image/*"></label></div>
+<img id="photo-preview" class="photo-preview" hidden alt="Foto selecionada">
+<button id="share" hidden>Compartilhar foto pelo celular</button>
+<button id="whatsapp" class="outline">Abrir WhatsApp com mensagem pronta</button>
+<button id="copy" class="outline">Copiar mensagem</button>
+<p class="tip" id="tip">Para enviar diretamente ao nosso número, abra a conversa do WhatsApp e anexe a foto. Pelo compartilhamento do celular, escolha o WhatsApp e o contato; talvez seja necessário colar a mensagem.</p>
+<button id="skip" class="skip">Agora não</button></div></div>
+<script>
+(()=>{
+'use strict';
+const ACCESS='SOMOS',PHONE='5571987650501',MESSAGE='Olá Vanni e Anne! Participei da oficina Mãos à Terra e essa é a minha nova plantinha!';
+const el=id=>document.getElementById(id),cv=el('certificate'),cx=cv.getContext('2d'),bg=new Image();
+let ready=false,photo=null,photoUrl=null,focusBefore=null;
+const err=(id,msg)=>{el(id).textContent=msg;el(id).hidden=!msg};
+bg.onload=()=>{ready=true;draw()};bg.onerror=()=>{err('name-error','O modelo oficial não carregou. Avise a equipe.');el('png').disabled=true;el('pdf').disabled=true};bg.src='./modelo-certificado.jpg';
+function draw(){if(!ready)return;cx.clearRect(0,0,2048,1536);cx.drawImage(bg,0,0,2048,1536);const name=el('name').value.trim().replace(/\s+/g,' ')||'Seu nome aqui';cx.textAlign='center';cx.textBaseline='alphabetic';cx.fillStyle='#214b24';let size=76;while(size>28){cx.font='bold '+size+'px Georgia,serif';if(cx.measureText(name).width<=1445)break;size-=2}cx.fillText(name,1024,626,1445)}
+function validName(){const name=el('name').value.trim().replace(/\s+/g,' ');if(name.length<3||name.length>80||/[<>\u0000-\u001f\u007f]/.test(name)){err('name-error','Informe um nome válido de 3 a 80 caracteres.');el('name').focus();return null}err('name-error','');return name}
+function slug(name){return name.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,50)||'participante'}
+function save(blob,name){const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),40000)}
+function pdfFromJPEG(jpeg){const enc=new TextEncoder(),parts=[],offsets=[];let count=0;function bytes(b){parts.push(b);count+=b.length}function t(s){bytes(enc.encode(s))}function obj(i){offsets[i]=count;t(i+' 0 obj\n')}let w=841.89,h=595.28,iw=h*4/3,x=(w-iw)/2;
+t('%PDF-1.4\n');obj(1);t('<< /Type /Catalog /Pages 2 0 R >>\nendobj\n');obj(2);t('<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n');obj(3);t('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 '+w+' '+h+'] /Resources << /XObject << /Im0 4 0 R >> >> /Contents 5 0 R >>\nendobj\n');obj(4);t('<< /Type /XObject /Subtype /Image /Width 2048 /Height 1536 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length '+jpeg.length+' >>\nstream\n');bytes(jpeg);t('\nendstream\nendobj\n');let drawing='q\n'+iw.toFixed(3)+' 0 0 '+h.toFixed(3)+' '+x.toFixed(3)+' 0 cm\n/Im0 Do\nQ\n';obj(5);t('<< /Length '+enc.encode(drawing).length+' >>\nstream\n'+drawing+'endstream\nendobj\n');let off=count;t('xref\n0 6\n0000000000 65535 f \n');for(let i=1;i<=5;i++)t(String(offsets[i]).padStart(10,'0')+' 00000 n \n');t('trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n'+off+'\n%%EOF');return new Blob(parts,{type:'application/pdf'})}
+function openModal(){focusBefore=document.activeElement;el('modal').hidden=false;el('skip').focus()}
+function closeModal(){el('modal').hidden=true;focusBefore?.focus()}
+el('gate-form').addEventListener('submit',e=>{e.preventDefault();if(el('code').value.normalize('NFKC').trim().toUpperCase().replace(/\s+/g,'')!==ACCESS){err('code-error','Código não reconhecido. Confira com a equipe.');return}el('gate').hidden=true;el('issue').hidden=false;el('name').focus();draw()});
+el('name').addEventListener('input',draw);
+el('png').addEventListener('click',()=>{const n=validName();if(!n||!ready)return;draw();cv.toBlob(b=>{if(!b){err('name-error','Falha ao gerar a imagem.');return}save(b,'certificado-maos-a-terra-'+slug(n)+'.png');openModal()},'image/png')});
+el('pdf').addEventListener('click',()=>{const n=validName();if(!n||!ready)return;draw();try{const s=atob(cv.toDataURL('image/jpeg',.94).split(',')[1]),a=new Uint8Array(s.length);for(let i=0;i<s.length;i++)a[i]=s.charCodeAt(i);save(pdfFromJPEG(a),'certificado-maos-a-terra-'+slug(n)+'.pdf');openModal()}catch(e){err('name-error','Falha ao gerar o PDF neste navegador.')}});
+el('skip').addEventListener('click',closeModal);el('modal').addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+function usePhoto(file){if(!file)return;if(!file.type.startsWith('image/')){alert('Escolha uma imagem.');return}if(file.size>20*1024*1024){alert('Escolha uma foto menor que 20 MB.');return}photo=file;if(photoUrl)URL.revokeObjectURL(photoUrl);photoUrl=URL.createObjectURL(file);el('photo-preview').src=photoUrl;el('photo-preview').hidden=false;el('share').hidden=false}
+el('camera').addEventListener('change',e=>usePhoto(e.target.files[0]));el('gallery').addEventListener('change',e=>usePhoto(e.target.files[0]));
+el('share').addEventListener('click',async()=>{if(!photo)return;try{if(!navigator.share||!navigator.canShare?.({files:[photo]})){el('tip').textContent='O navegador não permite compartilhar arquivos; abra o WhatsApp e anexe a foto manualmente.';return}await navigator.share({files:[photo],text:MESSAGE,title:'Minha plantinha - Mãos à Terra'})}catch(e){if(e.name!=='AbortError')el('tip').textContent='Abra a conversa e anexe sua foto manualmente.'}});
+el('whatsapp').addEventListener('click',()=>window.open('https://wa.me/'+PHONE+'?text='+encodeURIComponent(MESSAGE),'_blank','noopener,noreferrer'));
+el('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(MESSAGE);el('copy').textContent='Mensagem copiada!'}catch(e){el('tip').textContent=MESSAGE}});
+})();
+</script></body></html>
