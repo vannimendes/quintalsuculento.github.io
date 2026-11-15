@@ -122,9 +122,9 @@
         let fontSize=base;
         do{ctx.font='italic '+fontSize+'px Georgia,serif';fontSize-=2;}
         while(ctx.measureText(row).width>2000&&fontSize>51);
-        text(row,1240,rows.length===1?910:860+i*108,'italic '+(fontSize+2)+'px Georgia,serif','#164b32');
+        text(row,1240,rows.length===1?910:890+i*91,'italic '+(fontSize+2)+'px Georgia,serif','#164b32');
       });
-      line(440,rows.length===1?960:1020,2040,rows.length===1?960:1020,'#b8c8ad',3);
+      line(440,rows.length===1?960:1040,2040,rows.length===1?960:1040,'#b8c8ad',3);
     }
     function render() {
       if(!ctx)return;
