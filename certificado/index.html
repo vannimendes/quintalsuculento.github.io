@@ -22,7 +22,7 @@ main{max-width:1000px;margin:auto;padding:22px 16px 60px}.top{display:flex;justi
 <h2 id="modal-title">Mostre sua plantinha! 🌱</h2><p>Seu certificado foi preparado. Que tal nos mandar uma foto da suculenta que você plantou?</p>
 <button id="whatsapp" class="outline">Enviar pelo WhatsApp</button>
 <p class="tip">Ao abrir o WhatsApp, toque na câmera, fotografe sua plantinha e envie para nós. Não é necessário salvar nosso número.</p>
-<button id="skip" class="skip">Agora não</button></div></div>
+</div></div>
 <script>
 (()=>{
 'use strict';
@@ -37,13 +37,13 @@ function slug(name){return name.normalize('NFD').replace(/[\u0300-\u036f]/g,'').
 function save(blob,name){const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),40000)}
 function pdfFromJPEG(jpeg){const enc=new TextEncoder(),parts=[],offsets=[];let count=0;function bytes(b){parts.push(b);count+=b.length}function t(s){bytes(enc.encode(s))}function obj(i){offsets[i]=count;t(i+' 0 obj\n')}let w=841.89,h=595.28,iw=h*4/3,x=(w-iw)/2;
 t('%PDF-1.4\n');obj(1);t('<< /Type /Catalog /Pages 2 0 R >>\nendobj\n');obj(2);t('<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n');obj(3);t('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 '+w+' '+h+'] /Resources << /XObject << /Im0 4 0 R >> >> /Contents 5 0 R >>\nendobj\n');obj(4);t('<< /Type /XObject /Subtype /Image /Width 2048 /Height 1536 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length '+jpeg.length+' >>\nstream\n');bytes(jpeg);t('\nendstream\nendobj\n');let drawing='q\n'+iw.toFixed(3)+' 0 0 '+h.toFixed(3)+' '+x.toFixed(3)+' 0 cm\n/Im0 Do\nQ\n';obj(5);t('<< /Length '+enc.encode(drawing).length+' >>\nstream\n'+drawing+'endstream\nendobj\n');let off=count;t('xref\n0 6\n0000000000 65535 f \n');for(let i=1;i<=5;i++)t(String(offsets[i]).padStart(10,'0')+' 00000 n \n');t('trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n'+off+'\n%%EOF');return new Blob(parts,{type:'application/pdf'})}
-function openModal(){focusBefore=document.activeElement;el('modal').hidden=false;el('skip').focus()}
+function openModal(){focusBefore=document.activeElement;el('modal').hidden=false;el('whatsapp').focus()}
 function closeModal(){el('modal').hidden=true;focusBefore?.focus()}
 el('gate-form').addEventListener('submit',e=>{e.preventDefault();if(el('code').value.normalize('NFKC').trim().toUpperCase().replace(/\s+/g,'')!==ACCESS){err('code-error','Código não reconhecido. Confira com a equipe.');return}el('gate').hidden=true;el('issue').hidden=false;el('name').focus();draw()});
 el('name').addEventListener('input',draw);
 el('png').addEventListener('click',()=>{const n=validName();if(!n||!ready)return;draw();cv.toBlob(b=>{if(!b){err('name-error','Falha ao gerar a imagem.');return}save(b,'certificado-maos-a-terra-'+slug(n)+'.png');openModal()},'image/png')});
 el('pdf').addEventListener('click',()=>{const n=validName();if(!n||!ready)return;draw();try{const s=atob(cv.toDataURL('image/jpeg',.94).split(',')[1]),a=new Uint8Array(s.length);for(let i=0;i<s.length;i++)a[i]=s.charCodeAt(i);save(pdfFromJPEG(a),'certificado-maos-a-terra-'+slug(n)+'.pdf');openModal()}catch(e){err('name-error','Falha ao gerar o PDF neste navegador.')}});
-el('skip').addEventListener('click',closeModal);el('modal').addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+el('modal').addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 function openChat(){window.open('https://wa.me/'+PHONE+'?text='+encodeURIComponent(MESSAGE),'_blank','noopener,noreferrer')}
 el('whatsapp').addEventListener('click',openChat);
 })();
