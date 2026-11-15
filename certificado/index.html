@@ -20,12 +20,10 @@ main{max-width:1000px;margin:auto;padding:22px 16px 60px}.top{display:flex;justi
 <div class="downloads"><button id="png">Baixar imagem (PNG)</button><button id="pdf">Baixar PDF</button></div></div><p class="privacy">O nome não é enviado ao site. O modelo oficial é mantido sem alterações na arte, exceto o preenchimento do nome.</p></section></main>
 <div id="modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal-card">
 <h2 id="modal-title">Mostre sua plantinha! 🌱</h2><p>Seu certificado foi preparado. Que tal nos mandar uma foto da suculenta que você plantou?</p>
-<div class="photo-choice"><label for="camera">📷 Tirar foto<input id="camera" type="file" accept="image/*" capture="environment"></label><label for="gallery">🖼️ Galeria<input id="gallery" type="file" accept="image/*"></label></div>
+<div class="photo-choice"><label for="camera">📷 Tirar foto<input id="camera" type="file" accept="image/*" capture="environment"></label></div>
 <img id="photo-preview" class="photo-preview" hidden alt="Foto selecionada">
-<button id="share" hidden>Compartilhar foto pelo celular</button>
 <button id="whatsapp" class="outline">Abrir WhatsApp com mensagem pronta</button>
-<button id="copy" class="outline">Copiar mensagem</button>
-<p class="tip" id="tip">Para enviar diretamente ao nosso número, abra a conversa do WhatsApp e anexe a foto. Pelo compartilhamento do celular, escolha o WhatsApp e o contato; talvez seja necessário colar a mensagem.</p>
+<p class="tip" id="tip">Após tirar a foto, toque em “Abrir WhatsApp com mensagem pronta” e anexe a imagem à conversa. O WhatsApp não permite que a página anexe a foto automaticamente.</p>
 <button id="skip" class="skip">Agora não</button></div></div>
 <script>
 (()=>{
@@ -48,10 +46,8 @@ el('name').addEventListener('input',draw);
 el('png').addEventListener('click',()=>{const n=validName();if(!n||!ready)return;draw();cv.toBlob(b=>{if(!b){err('name-error','Falha ao gerar a imagem.');return}save(b,'certificado-maos-a-terra-'+slug(n)+'.png');openModal()},'image/png')});
 el('pdf').addEventListener('click',()=>{const n=validName();if(!n||!ready)return;draw();try{const s=atob(cv.toDataURL('image/jpeg',.94).split(',')[1]),a=new Uint8Array(s.length);for(let i=0;i<s.length;i++)a[i]=s.charCodeAt(i);save(pdfFromJPEG(a),'certificado-maos-a-terra-'+slug(n)+'.pdf');openModal()}catch(e){err('name-error','Falha ao gerar o PDF neste navegador.')}});
 el('skip').addEventListener('click',closeModal);el('modal').addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
-function usePhoto(file){if(!file)return;if(!file.type.startsWith('image/')){alert('Escolha uma imagem.');return}if(file.size>20*1024*1024){alert('Escolha uma foto menor que 20 MB.');return}photo=file;if(photoUrl)URL.revokeObjectURL(photoUrl);photoUrl=URL.createObjectURL(file);el('photo-preview').src=photoUrl;el('photo-preview').hidden=false;el('share').hidden=false}
-el('camera').addEventListener('change',e=>usePhoto(e.target.files[0]));el('gallery').addEventListener('change',e=>usePhoto(e.target.files[0]));
-el('share').addEventListener('click',async()=>{if(!photo)return;try{if(!navigator.share||!navigator.canShare?.({files:[photo]})){el('tip').textContent='O navegador não permite compartilhar arquivos; abra o WhatsApp e anexe a foto manualmente.';return}await navigator.share({files:[photo],text:MESSAGE,title:'Minha plantinha - Mãos à Terra'})}catch(e){if(e.name!=='AbortError')el('tip').textContent='Abra a conversa e anexe sua foto manualmente.'}});
+function usePhoto(file){if(!file)return;if(!file.type.startsWith('image/')){alert('Escolha uma imagem.');return}if(file.size>20*1024*1024){alert('Escolha uma foto menor que 20 MB.');return}photo=file;if(photoUrl)URL.revokeObjectURL(photoUrl);photoUrl=URL.createObjectURL(file);el('photo-preview').src=photoUrl;el('photo-preview').hidden=false}
+el('camera').addEventListener('change',e=>usePhoto(e.target.files[0]));
 el('whatsapp').addEventListener('click',()=>window.open('https://wa.me/'+PHONE+'?text='+encodeURIComponent(MESSAGE),'_blank','noopener,noreferrer'));
-el('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(MESSAGE);el('copy').textContent='Mensagem copiada!'}catch(e){el('tip').textContent=MESSAGE}});
 })();
 </script></body></html>
